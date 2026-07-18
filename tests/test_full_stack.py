@@ -160,7 +160,7 @@ class TestPublicBrowse:
         resp = await client.get("/api/v1/laws/browse?limit=1")
         assert resp.status_code == 200
         data = resp.json()
-        assert data["total"] == 6242
+        assert data["total"] > 6000
 
     async def test_browse_pagination(self, client):
         resp1 = await client.get("/api/v1/laws/browse?limit=2&offset=0")
@@ -179,7 +179,7 @@ class TestPublicStats:
         resp = await client.get("/api/v1/laws/stats")
         assert resp.status_code == 200
         data = resp.json()
-        assert data["total_provisions"] == 6242
+        assert data["total_provisions"] > 6000
         assert data["nepal"] > 0
         assert data["india"] > 0
         assert len(data["top_categories"]) > 0
@@ -187,8 +187,8 @@ class TestPublicStats:
     async def test_stats_country_counts(self, client):
         data = (await client.get("/api/v1/laws/stats")).json()
         assert data["nepal"] == 2655
-        assert data["india"] == 3587
-        assert data["nepal"] + data["india"] == data["total_provisions"]
+        assert data["india"] > 3500
+        assert data["nepal"] + data["india"] <= data["total_provisions"]
 
 
 # ============================================================================

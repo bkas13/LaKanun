@@ -48,6 +48,8 @@ def create_app() -> FastAPI:
     from backend.routers.users import router as users_router
     from backend.routers.admin import router as admin_router
     from backend.routers.feedback import router as feedback_router
+    from backend.routers.rights import router as rights_router
+    from backend.routers.issues import router as issues_router
 
     prefix = settings.api_v1_prefix
     app.include_router(auth_router, prefix=prefix)
@@ -56,6 +58,8 @@ def create_app() -> FastAPI:
     app.include_router(users_router, prefix=prefix)
     app.include_router(admin_router, prefix=prefix)
     app.include_router(feedback_router, prefix=prefix)
+    app.include_router(rights_router, prefix=prefix)
+    app.include_router(issues_router, prefix=prefix)
 
     # ── Health ────────────────────────────────────────────────────────
     @app.get("/health")

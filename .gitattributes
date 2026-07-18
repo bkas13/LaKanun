@@ -1,0 +1,9 @@
+* text=auto
+*.py diff=python
+*.md text
+
+# Avoid exporting large generated directories
+data/processed/** export-ignore
+data/embeddings/** export-ignore
+frontend/node_modules/** export-ignore
+frontend/.next/** export-ignore

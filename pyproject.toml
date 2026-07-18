@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nepal-legal-ai"
+version = "0.1.0"
+description = "Legal AI platform for Nepal and India with multilingual support"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "sentence-transformers==3.0.1",
+    "chromadb==0.5.5",
+    "torch==2.3.0",
+    "transformers==4.41.0",
+    "accelerate==0.30.0",
+    "fastapi==0.110.1",
+    "uvicorn[standard]==0.29.0",
+    "pydantic==2.7.1",
+    "pydantic-settings==2.3.3",
+    "aiohttp==3.9.5",
+    "aiofiles==23.2.1",
+    "beautifulsoup4==4.12.3",
+    "pdfplumber==0.11.4",
+    "lxml==5.2.2",
+    "python-dotenv==1.0.1",
+    "langdetect==1.0.9",
+    "tqdm==4.66.4",
+    "tenacity==8.3.0",
+    "structlog==24.1.0",
+    "pyyaml==6.0.1",
+    "click==8.1.7",
+    "rich==13.7.1",
+    "slowapi==0.1.9",
+    "streamlit==1.35.0",
+    "plotly==5.22.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.2.0",
+    "pytest-asyncio==0.23.3",
+    "pytest-cov==5.0.0",
+    "black==24.3.0",
+    "ruff==0.4.3",
+    "mypy==1.9.0",
+]
+llm = [
+    "anthropic==0.25.0",
+    "openai==1.30.0",
+]
+
+[project.scripts]
+scraper = "src.scraper:main"
+embeddings = "src.embeddings:main"
+classifier = "src.classifier:main"
+chatbot = "src.chatbot:main"
+ingest-constitution = "data.ingest_constitution:main"
+build-corpus = "src.corpus_builder:main"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "I", "W", "UP", "B", "C4", "SIM", "T20"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false

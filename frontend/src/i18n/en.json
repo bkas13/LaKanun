@@ -1,0 +1,611 @@
+{
+  "app_name": "ल Kanun",
+  "subtitle": "AI-Powered Legal Assistant",
+  "tagline": "AI-powered legal assistant for Nepal & India",
+  "quote": "There is no excuse for not knowing the law.",
+  "quote_attr": "— Legal Maxim",
+  "nepal": "Nepal",
+  "india": "India",
+  "nepal_india": "Nepal & India",
+  "stats": {
+    "provisions": "Legal Provisions",
+    "nepal_laws": "Nepal Laws",
+    "india_laws": "India Laws",
+    "categories": "Legal Categories",
+    "documents": "Legal Documents"
+  },
+  "nav": {
+    "search": "Search",
+    "browse_laws": "Browse Laws",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "login": "Log in",
+    "register": "Register",
+    "logout": "Logout",
+    "rights": "Know Your Rights",
+    "issues": "Know Your Issues"
+  },
+  "search": {
+    "placeholder": "Search laws, articles, provisions... (English, Nepali, or Hindi)",
+    "button": "Search",
+    "searching": "Searching...",
+    "no_results": "No results found. Try a different query.",
+    "results_found": "results found",
+    "sorted_by_relevance": "Sorted by relevance",
+    "try": "Try:",
+    "match": "match",
+    "mode_laws": "Laws",
+    "mode_issues": "Issues",
+    "issues_placeholder": "Describe your legal issue in any language...",
+    "issues_hint": "Describe your legal situation",
+    "issues_hint_desc": "Type in English, Nepali, or Hindi — we'll find the relevant laws",
+    "view_all_results": "View all results on Browse Laws page",
+    "view_all_results_hint": "Full results with details on Browse Laws page",
+    "results_for": "Showing results for",
+    "issues_results_for": "Issue analysis for"
+  },
+  "quick_topics": {
+    "title": "Quick Topics",
+    "hint": "— click to search",
+    "property": "Property Rights",
+    "family": "Family & Marriage",
+    "labor": "Labor & Wages",
+    "criminal": "Criminal Law",
+    "environment": "Environment",
+    "business": "Business & Tax",
+    "constitutional": "Constitutional Rights",
+    "contracts": "Contracts"
+  },
+  "quick_issues": {
+    "title": "Common Legal Issues",
+    "hint": "— describe your situation",
+    "encroachment": "Someone encroached on my land",
+    "unpaid_wages": "Employer not paying wages",
+    "domestic_violence": "Domestic violence situation",
+    "wrongful_termination": "Wrongful termination from job",
+    "property_dispute": "Property inheritance dispute",
+    "consumer_complaint": "Consumer fraud or complaint",
+    "divorce": "Filing for divorce",
+    "arrest_rights": "Rights during arrest"
+  },
+  "how_it_works": {
+    "title": "How it works",
+    "step1_title": "Ask in any language",
+    "step1_desc": "Type your legal question in English, Nepali, or Hindi. Our AI understands all three.",
+    "step2_title": "Get ranked results",
+    "step2_desc": "Results are ranked by relevance across Nepal and India legal databases.",
+    "step3_title": "Save & prepare",
+    "step3_desc": "Bookmark provisions, take case notes, and build your legal research library."
+  },
+  "cta": {
+    "title": "Ready to do legal research smarter?",
+    "desc": "Create a free account to save bookmarks, take notes, and access your research anywhere.",
+    "get_started": "Get Started Free",
+    "sign_in": "Sign In"
+  },
+  "laws": {
+    "title": "Browse Legal Documents",
+    "all_countries": "All Countries",
+    "all_categories": "All Categories",
+    "loading": "Loading...",
+    "provisions": "provisions",
+    "search_placeholder": "Search laws, articles, provisions...",
+    "search_button": "Search",
+    "no_laws_found": "No laws found",
+    "documents": "documents",
+    "popular": "Popular Laws",
+    "recent": "Recent Updates",
+    "categories": {
+      "title": "Legal Categories",
+      "constitution": "Constitution",
+      "civil": "Civil",
+      "criminal": "Criminal",
+      "labor": "Labor",
+      "family": "Family",
+      "commercial": "Commercial"
+    },
+    "no_popular": "No popular laws yet. Start browsing to see trends!",
+    "no_recent": "No recent updates available.",
+    "view_count": "{count} views",
+    "views": "views",
+    "view_rank": "#{rank}",
+    "view_details": "View details",
+    "essential_provisions": "Essential provisions frequently referenced in legal practice",
+    "newest_laws": "Most recently enacted legal provisions",
+    "bookmark": "Bookmark",
+    "bookmarked": "Bookmarked",
+    "remove_bookmark": "Remove Bookmark",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page_of": "Page {current} of {total}"
+    }
+  },
+  "auth": {
+    "login_title": "Log in to ल Kanun",
+    "login_link": "Log in",
+    "register_title": "Create Account",
+    "register_link": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "full_name": "Full Name",
+    "role": "Role",
+    "role_hint": "Admin accounts are created by existing admins.",
+    "sign_in": "Sign In",
+    "signing_in": "Signing in...",
+    "create_account": "Create Account",
+    "creating_account": "Creating account...",
+    "no_account": "Don't have an account?",
+    "has_account": "Already have an account?",
+    "password_min": "Password must be at least 8 characters",
+    "password_mismatch": "Passwords do not match",
+    "privacy_title": "Privacy Settings",
+    "privacy_desc": "Choose what data you're comfortable sharing. You can change these anytime.",
+    "continue": "Continue →",
+    "back": "← Back",
+    "privacy_search": "Save search history",
+    "privacy_search_desc": "Remember your searches for faster access next time",
+    "privacy_personalized": "Personalized results",
+    "privacy_personalized_desc": "Rank results based on your role (lawyer, judge, etc.)",
+    "privacy_analytics": "Usage analytics",
+    "privacy_analytics_desc": "Help us improve by sharing anonymous usage data",
+    "privacy_sync": "Cloud sync",
+    "privacy_sync_desc": "Sync bookmarks and notes across your devices",
+    "privacy_updates": "Legal updates",
+    "privacy_updates_desc": "Get notified about new laws and amendments",
+    "welcome_msg": "Welcome back!",
+    "welcome_new": "Welcome to ल Kanun!",
+    "login_failed": "Login failed. Check your credentials.",
+    "registration_failed": "Registration failed.",
+    "placeholder_email": "you@example.com",
+    "placeholder_name": "Ram Bahadur",
+    "placeholder_password": "8+ characters"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "overview": "Overview",
+    "bookmarks": "Bookmarks",
+    "case_notes": "Case Notes",
+    "search_history": "Search History",
+    "admin_panel": "Admin Panel",
+    "back_to_dashboard": "Back to Dashboard",
+    "quick_actions": "Quick Actions",
+    "search_laws": "Search Laws",
+    "browse_documents": "Browse Documents",
+    "my_bookmarks": "My Bookmarks",
+    "case_notes_action": "Case Notes",
+    "role": "Role",
+    "language": "Language",
+    "account": "Account",
+    "active": "Active",
+    "quick_access": "Quick Access",
+    "search_laws_action": "Search Laws",
+    "browse_laws_action": "Browse Laws",
+    "bookmarks_action": "Bookmarks",
+    "case_notes_action_label": "Case Notes",
+    "search_history_action": "Search History",
+    "admin_panel_action": "Admin Panel",
+    "legal_corpus": "Legal Corpus",
+    "categories": "categories",
+    "trusted_sources": "Trusted Sources",
+    "provisions": "provisions",
+    "good_morning": "Good morning",
+    "good_afternoon": "Good afternoon",
+    "good_evening": "Good evening",
+    "role_labels": {
+      "public": "Public User",
+      "lawyer": "Legal Professional",
+      "judge": "Judge",
+      "admin": "Administrator"
+    }
+  },
+  "bookmarks": {
+    "title": "Bookmarks",
+    "empty": "No bookmarks yet. Search for laws and save them here.",
+    "remove": "Remove",
+    "saved": "Saved",
+    "access_error": "You need a lawyer or judge account to view bookmarks."
+  },
+  "notes": {
+    "title": "Case Notes",
+    "new_note": "+ New Note",
+    "cancel": "Cancel",
+    "empty": "No case notes yet. Create one to get started.",
+    "title_placeholder": "Title",
+    "content_placeholder": "Note content...",
+    "tags_placeholder": "Tags (comma-separated)",
+    "linked_placeholder": "Linked provisions (comma-separated)",
+    "save": "Save Note",
+    "delete": "Delete",
+    "updated": "Updated",
+    "access_error": "You need a lawyer or judge account to use case notes."
+  },
+  "history": {
+    "title": "Search History",
+    "empty": "No search history yet.",
+    "results": "results",
+    "remove": "Remove"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "documents": "Documents",
+    "provisions": "Provisions",
+    "users": "Users",
+    "user_management": "User Management",
+    "email": "Email",
+    "name": "Name",
+    "role": "Role",
+    "active": "Active",
+    "joined": "Joined",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "ai_tools": {
+    "case_brief": {
+      "title": "Case Brief Generator",
+      "description": "Generate a structured case brief with relevant laws and analysis",
+      "case_description": "Case Description",
+      "case_placeholder": "Describe the case, legal situation, or legal question in detail...",
+      "country": "Country (Optional)",
+      "generate": "Generate Case Brief",
+      "generating": "Generating Brief...",
+      "summary": "Case Summary",
+      "key_issues": "Key Issues",
+      "relevant_laws": "Relevant Laws",
+      "recommended_actions": "Recommended Actions",
+      "strengths": "Strengths",
+      "weaknesses": "Weaknesses",
+      "precedents": "Related Precedents",
+      "match": "match"
+    },
+    "precedent": {
+      "title": "Precedent Finder",
+      "description": "Find similar legal precedents and cross-country matches",
+      "query": "Legal Question or Case Description",
+      "query_placeholder": "Describe the legal question or case to find similar precedents...",
+      "country": "Country (Optional)",
+      "find": "Find Precedents",
+      "searching": "Searching across legal databases...",
+      "principles": "Legal Principles Identified",
+      "cross_country": "Cross-Country Comparison",
+      "precedents": "Precedents",
+      "examples_title": "Try these searches",
+      "example_1": "Property inheritance dispute",
+      "example_2": "Wrongful termination from job",
+      "example_3": "Consumer fraud complaint",
+      "example_4": "Contract breach remedies",
+      "example_5": "Criminal liability defenses",
+      "example_6": "Labor rights violation",
+      "search_tip": "Be specific for better results",
+      "results_summary": "Found {{count}} precedents",
+      "areas_summary": "across {{areas}} legal areas",
+      "nepal_count": "{{count}} Nepal",
+      "india_count": "{{count}} India",
+      "top_category": "Most relevant: {{category}}",
+      "view_details": "View full details",
+      "no_results": "No precedents found. Try a different query.",
+      "expand": "Show more",
+      "collapse": "Show less",
+      "relevance": "relevance",
+      "article": "Art.",
+      "source": "Source"
+    },
+    "analysis": {
+      "title": "Argument Analysis",
+      "description": "Analyze the strength of a legal argument with supporting laws",
+      "argument": "Your Legal Argument",
+      "argument_placeholder": "Present your legal argument or position...",
+      "opposing_view": "Opposing View (Optional)",
+      "opposing_placeholder": "If you know the opposing argument, enter it here for better analysis...",
+      "country": "Country (Optional)",
+      "analyze": "Analyze Argument",
+      "analyzing": "Analyzing...",
+      "strength": "Argument Strength",
+      "supporting_laws": "Supporting Laws",
+      "counterarguments": "Counterarguments",
+      "recommendations": "Recommendations",
+      "risk_factors": "Risk Factors",
+      "relevance": "relevance"
+    },
+    "access_restricted": "Access Restricted",
+    "access_message": "This feature is available to lawyers and judges only.",
+    "locked_title": "Access Restricted",
+    "locked_desc": "This feature is available to lawyers and judges only."
+  },
+  "footer": {
+    "copyright": "© 2026 ल Kanun. Nepal & India Legal AI Platform.",
+    "disclaimer": "For informational purposes only — not legal advice."
+  },
+  "know_your_rights": {
+    "title": "Know Your Rights",
+    "subtitle": "Key legal rights in Nepal & India",
+    "rights": [
+      {
+        "title": "Right to Equality",
+        "desc": "Every citizen is equal before the law. No discrimination on grounds of religion, race, caste, sex, or place of birth.",
+        "articles": "Nepal Constitution Art. 18, India Constitution Art. 14"
+      },
+      {
+        "title": "Right to Life & Dignity",
+        "desc": "No person shall be deprived of their right to life or personal liberty except according to procedure established by law.",
+        "articles": "Nepal Constitution Art. 16, India Constitution Art. 21"
+      },
+      {
+        "title": "Right to Free Legal Aid",
+        "desc": "Every citizen has the right to free legal aid from the state if they cannot afford a lawyer.",
+        "articles": "Nepal Constitution Art. 20, India Constitution Art. 39A"
+      },
+      {
+        "title": "Right Against Exploitation",
+        "desc": "Forced labor and human trafficking are prohibited. No child shall be employed in hazardous work.",
+        "articles": "Nepal Constitution Art. 17, India Constitution Art. 23-24"
+      }
+    ]
+  },
+  "legal_faq": {
+    "title": "Common Legal Questions",
+    "subtitle": "Quick answers to frequently asked legal questions",
+    "questions": [
+      {
+        "q": "How do I file a police complaint in Nepal?",
+        "a": "You can file a First Information Report (FIR) at your local police station. You can also file online through the Nepal Police website. Provide your ID, a written statement, and any evidence.",
+        "category": "criminal"
+      },
+      {
+        "q": "What are my rights if arrested?",
+        "a": "You have the right to know the reason for arrest, to remain silent, to legal counsel, and to be produced before a magistrate within 24 hours.",
+        "category": "criminal"
+      },
+      {
+        "q": "How does property inheritance work?",
+        "a": "In Nepal, property is divided equally among legal heirs per the Muluki Ain. In India, the Indian Succession Act governs inheritance. A will can override default rules.",
+        "category": "property"
+      },
+      {
+        "q": "What is the process for divorce?",
+        "a": "Mutual consent divorce takes 6-18 months. Contested divorce requires grounds (cruelty, desertion, conversion, etc.) and may take years. Mediation is often attempted first.",
+        "category": "family"
+      },
+      {
+        "q": "Can I get free legal help?",
+        "a": "Yes. Both Nepal and India provide free legal aid through legal aid commissions and legal services authorities for those who cannot afford representation.",
+        "category": "constitutional"
+      },
+      {
+        "q": "How long does a court case take?",
+        "a": "Civil cases: 1-5 years. Criminal cases: 2-10+ years depending on severity. Supreme Court cases may take even longer. Pre-litigation mediation can speed resolution.",
+        "category": "civil_procedure"
+      }
+    ]
+  },
+  "categories_section": {
+    "title": "Browse by Category",
+    "subtitle": "Explore laws organized by legal area"
+  },
+  "usecase_banner": {
+    "title": "Welcome to ल Kanun",
+    "subtitle": "AI-Powered Legal Research for Nepal & India",
+    "dismiss": "Got it",
+    "features_title": "What you can do",
+    "features": [
+      { "icon": "🔍", "title": "Search in any language", "desc": "Type legal questions in English, Nepali, or Hindi" },
+      { "icon": "📚", "title": "Browse 6,242+ provisions", "desc": "Access Nepal & India laws organized by category" },
+      { "icon": "🔖", "title": "Save & organize", "desc": "Bookmark provisions, take case notes (account required)" },
+      { "icon": "👍", "title": "Help improve results", "desc": "Rate search results to train better ranking" }
+    ],
+    "prompts_title": "Try searching",
+    "sample_prompts": [
+      "What are my rights if arrested?",
+      "How to file for divorce in Nepal?",
+      "Property inheritance laws India",
+      "Minimum wages for labor workers",
+      "Child custody laws Nepal"
+    ],
+    "privacy_title": "Your Privacy",
+    "privacy_desc": "Choose what data to share. You can change these anytime.",
+    "privacy_items": [
+      { "key": "search_history", "label": "Save search history", "desc": "Remember searches for faster access" },
+      { "key": "personalized", "label": "Personalized results", "desc": "Rank results based on your role" },
+      { "key": "analytics", "label": "Usage analytics", "desc": "Help us improve with anonymous data" },
+      { "key": "cloud_sync", "label": "Cloud sync", "desc": "Sync bookmarks across devices" },
+      { "key": "legal_updates", "label": "Legal updates", "desc": "Get notified about new laws" }
+    ]
+  },
+  "faq_page": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "How to use ल Kanun — for everyone",
+    "how_to_use": {
+      "title": "How to Use ल Kanun",
+      "items": [
+        { "q": "What is ल Kanun?", "a": "ल Kanun is a free AI-powered legal research tool for Nepal and India. It searches through 6,242+ legal provisions to help you find relevant laws and articles." },
+        { "q": "Do I need to create an account?", "a": "No. You can search and browse laws without an account. Create a free account to save bookmarks, take case notes, and track your research." },
+        { "q": "Which languages are supported?", "a": "You can search in English, Nepali (नेपाली), and Hindi (हिन्दी). The interface is available in all three languages." },
+        { "q": "Is this legal advice?", "a": "No. ल Kanun provides information for educational purposes only. Always consult a qualified lawyer for legal advice." }
+      ]
+    },
+    "layman": {
+      "title": "For General Users",
+      "desc": "Simple guides for everyday legal questions",
+      "items": [
+        { "q": "How do I find a specific law?", "a": "Type your question in the search bar. For example: 'What are the rules for renting a house?' or 'How to register a business in Nepal?' Results are ranked by relevance." },
+        { "q": "Can I search in Nepali?", "a": "Yes. Type in Nepali script (नेपाली) and the search will find matching provisions. For example: 'घर भाडामा दिने नियम' or 'तलब र ज्याला'." },
+        { "q": "What do the percentage scores mean?", "a": "The score shows how relevant each result is to your query. Higher = more relevant. A score of 80% means strong match." },
+        { "q": "How do I save important provisions?", "a": "Create a free account, then click the bookmark icon on any search result to save it to your collection." },
+        { "q": "Can I use this on my phone?", "a": "Yes. ल Kanun works on any device with a web browser — phone, tablet, or computer." }
+      ]
+    },
+    "expert": {
+      "title": "For Legal Professionals",
+      "desc": "Advanced features for lawyers and judges",
+      "items": [
+        { "q": "How do I prepare case research?", "a": "Search for relevant legal provisions, bookmark key articles, then use Case Notes to organize your arguments. Link provisions directly to your notes." },
+        { "q": "Can I compare Nepal and India laws?", "a": "Yes. Use the country filter in search or browse to compare how Nepal and India handle the same legal issue. Results show which country each provision is from." },
+        { "q": "How do I track my research?", "a": "Your search history is automatically saved (if enabled). Access it from Dashboard → Search History. You can also export your bookmarks." },
+        { "q": "What legal areas are covered?", "a": "Criminal law, civil law, constitutional law, family law, property law, labor law, environmental law, commercial law, consumer protection, and more." },
+        { "q": "How do case notes work?", "a": "Go to Dashboard → Case Notes. Create notes with titles, content, tags, and link them to specific legal provisions. Notes are private to your account." }
+      ]
+    },
+    "still_have_questions": "Still have questions? Contact us."
+  },
+  "rights_page": {
+    "title": "Know Your Rights",
+    "subtitle": "Interactive scenarios to help you understand your legal rights",
+    "loading": "Loading rights...",
+    "back": "← Back to Rights",
+    "your_rights": "Your Rights",
+    "authorities_must": "Authorities Must",
+    "deadlines": "Important Deadlines",
+    "where_to_go": "Where to Go",
+    "linked_provisions": "Linked Provisions",
+    "print": "Print Rights Card",
+    "share": "Share",
+    "copied": "Link copied!",
+    "view_another": "View Another Scenario",
+    "learn_more": "Learn more",
+    "describe_issue": "Describe Your Issue",
+    "disclaimer": "For informational purposes only — not legal advice",
+    "print_disclaimer": "Source: ल Kanun — For informational purposes only",
+    "categories": {
+      "criminal": "Criminal",
+      "family": "Family",
+      "property": "Property",
+      "labor": "Labor",
+      "consumer": "Consumer",
+      "child": "Child",
+      "cyber": "Cyber",
+      "constitutional": "Constitutional"
+    }
+  },
+  "know_your_issues": {
+    "title": "Know Your Issues",
+    "subtitle": "Describe your legal problem and find the laws that protect you",
+    "cta": "Find Laws for My Issue",
+    "samples": [
+      { "icon": "🚔", "title": "Arrested by Police", "query": "I was arrested by police" },
+      { "icon": "🏠", "title": "Domestic Violence", "query": "My husband beats me" },
+      { "icon": "🔑", "title": "Tenant Won't Leave", "query": "My tenant won't leave my house" },
+      { "icon": "💼", "title": "Fired Without Notice", "query": "My employer fired me without notice" },
+      { "icon": "🛡️", "title": "Defective Product", "query": "I bought a defective product" },
+      { "icon": "⚖️", "title": "Property Inheritance Dispute", "query": "My father died and siblings are fighting over property" },
+      { "icon": "💻", "title": "Bank Account Hacked", "query": "Someone hacked my bank account" },
+      { "icon": "🆓", "title": "Can't Afford a Lawyer", "query": "I need a lawyer but can't afford one" }
+    ]
+  },
+  "issues_page": {
+    "title": "Find Laws for Your Issue",
+    "subtitle": "Describe your legal situation and we'll find the relevant laws, your rights, and next steps.",
+    "placeholder": "e.g. I was arrested, domestic violence, property dispute...",
+    "search": "Find Laws",
+    "searching": "Searching...",
+    "identified_issue": "Identified Issue:",
+    "share": "Share",
+    "what_to_do": "What You Should Do",
+    "key_provisions": "Key Legal Provisions",
+    "all_results": "All Search Results",
+    "no_results": "No results found. Try rephrasing your issue.",
+    "search_failed": "Search failed. Please try again.",
+    "describe_issue": "Describe your legal issue above to find relevant laws",
+    "issue_finder": "Issue Finder",
+    "find_laws_for_issue": "Find Laws for Your Issue",
+    "describe_situation": "Describe your legal situation and we'll find the relevant laws, your rights, and next steps.",
+    "search_placeholder": "e.g. I was arrested, domestic violence, property dispute...",
+    "country_nepal": "Nepal",
+    "country_india": "India",
+    "article_prefix": "Art."
+  },
+  "search_modal": {
+    "legal_text": "Legal Text",
+    "plain_language": "Plain Language",
+    "no_summary": "No plain language explanation available for this provision.",
+    "related_provisions": "Related Provisions",
+    "no_related": "No related provisions found.",
+    "view": "View",
+    "close": "Close",
+    "copy": "Copy Full Text",
+    "copied": "Copied!",
+    "match": "match",
+    "source_document": "Source Document",
+    "citation": "Citation",
+    "view_official_source": "View official source",
+    "last_verified": "Last verified",
+    "text_from_original": "Text from original source",
+    "full_text": "Full Text",
+    "in_plain_language": "In Plain Language",
+    "informational_only": "Informational only",
+    "reported": "Reported ✓",
+    "report": "Report",
+    "relevance_labels": ["Low", "Fair", "Good", "Strong", "Excellent"]
+  },
+  "country_switcher": {
+    "all_laws": "All Laws (Nepal & India)",
+    "all_laws_short": "All Laws",
+    "nepal_laws": "Nepal Laws",
+    "nepal_short": "Nepal",
+    "india_laws": "India Laws",
+    "india_short": "India",
+    "select_country": "Select Country",
+    "country_label_all": "All Laws",
+    "country_label_nepal": "Nepal",
+    "country_label_india": "India"
+  },
+  "language_switcher": {
+    "english": "English",
+    "english_short": "EN",
+    "nepali_short": "NE",
+    "hindi_short": "HI"
+  },
+  "navbar": {
+    "more": "More",
+    "country": "Country",
+    "language": "Language",
+    "faq_help": "FAQ / Help",
+    "avatar_fallback": "U",
+    "my_dashboard": "My Dashboard",
+    "admin_panel": "Admin Panel",
+    "sign_out": "Sign out",
+    "signed_in_as": "Signed in as",
+    "register_title": "Join Kanun",
+    "register_subtitle": "Save bookmarks, annotate laws, and access your legal research anywhere.",
+    "register_cta": "Create free account"
+  },
+  "homepage": {
+    "know_your_rights_badge": "Know Your Rights",
+    "know_your_rights_desc_nepal": "Key legal rights in Nepal",
+    "know_your_rights_desc_india": "Key legal rights in India",
+    "explore_all_rights": "Explore All Rights Scenarios",
+    "know_your_issues_badge": "Know Your Issues",
+    "find_laws_cta": "Find laws",
+    "faq_badge": "FAQ",
+    "new_here": "New here?",
+    "signed_in_as": "Signed in as",
+    "go_to_dashboard": "Go to Dashboard",
+    "feedback_title": "Your Feedback Matters to Us",
+    "feedback_desc": "We're constantly improving. Your thoughts, suggestions, or objections help us serve you better.",
+    "feedback_cta": "Share Your Feedback",
+    "feedback_placeholder": "UI, Suggestion, Bug, Objection",
+    "search_suggestions": ["property rights", "custody", "labor wages"],
+    "country_all": "All",
+    "country_nepal": "Nepal",
+    "country_india": "India",
+    "category_all": "All Categories",
+    "category_criminal": "Criminal",
+    "category_constitutional": "Constitutional",
+    "category_civil": "Civil",
+    "category_labor": "Labor",
+    "category_family": "Family",
+    "category_consumer": "Consumer",
+    "sort_relevance": "Relevance",
+    "sort_newest": "Newest First",
+    "sort_oldest": "Oldest First",
+    "sort_country": "By Country",
+    "clear_filters": "Clear Filters"
+  },
+  "disclaimer_banner": {
+    "main": "This is legal information, not legal advice.",
+    "sub": "Laws change — always verify with a qualified lawyer and check the official source."
+  },
+  "feedback": {
+    "give_feedback": "Give Feedback"
+  }
+}

@@ -1,0 +1,45 @@
+# ─── Backend-only production dependencies (excludes heavy ML stack) ──────
+
+# Web framework
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+python-multipart>=0.0.9
+starlette>=0.37.0
+anyio>=4.0.0
+httpx>=0.27.0
+
+# Database
+sqlalchemy>=2.0.0
+aiosqlite>=0.22.0
+
+# Auth
+bcrypt==4.0.1
+python-jose[cryptography]>=3.5.0
+passlib[bcrypt]>=1.7.0
+email-validator>=2.0.0
+
+# Async
+aiohttp>=3.9.0
+aiofiles>=23.0.0
+greenlet>=3.0.0
+
+# Utilities
+structlog>=24.0.0
+python-dotenv>=1.0.0
+pyyaml>=6.0.0
+click>=8.0.0
+rich>=13.0.0
+tenacity>=8.0.0
+tqdm>=4.60.0
+
+# Rate limiting
+slowapi>=0.1.9
+
+# Document processing (lazy-loaded, for /ai/upload-document)
+pdfplumber>=0.11.0
+pillow>=11.0.0
+
+# Optional (for /health endpoint metrics)
+psutil>=5.0.0

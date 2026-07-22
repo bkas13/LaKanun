@@ -69,6 +69,7 @@ ISSUE_PATTERNS: list[dict] = [
         "id": "workplace",
         "keywords": ["work", "job", "employer", "fired", "terminated", "wages", "salary", "injury", "worker", "employee", "labor", "labour"],
         "vernacular": ["nokri", "jyala", "majdur", "kaam", "lagadhari", "jagire", "naukri chhodyo", "tankhwah", "pesi"],
+        "keywords_dev": ["रोजगार", "रोजगारदाता", "नोकरी", "जागिर", "काम", "कर्मचारी", "मजदूर", "श्रम", "तलब", "ज्याला", "हटाउनु", "निकाल्नु", "निकाल्यो", "बर्खास्त", "सूचना बिना", "अधिकार", "श्रम कानून", "उल्लंघन"],
         "intent_phrases": ["employer fired me", "not paying wages", "salary not given", "workplace injury", "lost my job", "employer exploiting", "no salary increment"],
         "search_queries": ["employment wages termination", "workplace injury compensation", "worker rights labor", "wrongful termination"],
         "categories": ["labor_general", "wages_and_payment", "occupational_safety"],
@@ -81,6 +82,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "consumer",
         "keywords": ["consumer", "product", "defective", "refund", "shop", "bought", "purchase", "service", "complaint", "warranty"],
+        "keywords_dev": ["उपभोक्ता", "सामान", "दोषपूर्ण", "रेफन्ड", "फिर्ता", "पैसा फिर्ता", "बिल", "ग्यारेन्टी", "वारेन्टी", "पसल", "किनेको", "बेचेको", "मिसावट", "म्याद गुज्रिएको", "धोका", "ठगी"],
         "vernacular": ["kharid", "defective product", "paisa firta", "warranty", "complaint", "samaan bigriyo"],
         "intent_phrases": ["bought defective product", "shop not giving refund", "product not working", "consumer complaint", "service not provided", "warranty claim denied"],
         "search_queries": ["consumer protection defective product", "refund warranty complaint", "consumer rights defect"],
@@ -108,6 +110,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "child",
         "keywords": ["child", "minor", "kidnapping", "abduction", "custody", "adoption", "abuse", "child labor", "school"],
+        "keywords_dev": ["बाल", "बच्चा", "नाबालिग", "बालबालिका", "बाल श्रम", "स्कुल", "विद्यालय", "अपहरण", "हराएको", "बाल संरक्षण", "अभिभावक", "सन्तान", "हेरचाह"],
         "vernacular": ["bachcha", "bal", "apaharan", "harayeko bachcha", "bachcha ko haq", "paalana"],
         "intent_phrases": ["child custody", "kidnapped child", "child labor", "minor rights", "child abuse", "adoption process", "child not going to school"],
         "search_queries": ["child protection minor rights", "custody guardianship adoption", "child labor exploitation", "juvenile justice"],
@@ -121,6 +124,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "marriage_divorce",
         "keywords": ["marriage", "divorce", "wedding", "spouse", "alimony", "maintenance", "matrimonial", "bigamy"],
+        "keywords_dev": ["विवाह", "तलाक", "बिहे", "बैवाहिक", "पति", "पत्नी", "श्रीमान", "श्रीमती", "भरणपोषण", "सम्बन्ध विच्छेद", "बहुविवाह", "जीवनसम्बन्धी"],
         "vernacular": ["byaah", "talaq", "vivah", "alimony", "bivaha bhangai", "kharcha paani", "dampati"],
         "intent_phrases": ["want divorce", "marriage problems", "spouse not maintaining", "alimony rights", "domestic marriage dispute", "second marriage illegal"],
         "search_queries": ["marriage divorce spousal rights", "alimony maintenance", "matrimonial dispute", "divorce procedure"],
@@ -134,6 +138,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "cyber_fraud",
         "keywords": ["online", "cyber", "hack", "phishing", "fraud", "scam", "internet", "digital", "email", "password", "stolen online"],
+        "keywords_dev": ["अनलाइन", "इन्टरनेट", "साइबर", "ह्याक", "ठगी", "धोखाधडी", "पासवर्ड", "बैंक खाता", "धम्की", "उत्पीडन", "फोन", "कल", "एसएमएस", "गोपनीयता"],
         "vernacular": ["online thagi", "dhoka", "hack", "phishing", "password chori", "online fraud", "internet fraud"],
         "intent_phrases": ["online fraud happened", "someone hacked my account", "password stolen", "online scam", "digital fraud", "email phishing"],
         "search_queries": ["cyber crime online fraud", "digital evidence", "hacking data theft", "information technology offence"],
@@ -147,6 +152,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "cheque_bounce",
         "keywords": ["cheque", "check", "bounce", "bounced", "dishonor", "insufficient", "bank"],
+        "keywords_dev": ["चेक", "बैंक", "बाउन्स", "डिसऑनर", "भुक्तानी", "पैसा", "अस्वीकृत", "रकम", "ब्याज"],
         "vernacular": ["cheque bounce", "check bounce", "cheque dishonor", "paisa chhodyena bank"],
         "intent_phrases": ["cheque bounced", "cheque dishonored", "bank returned cheque", "insufficient funds cheque", "payment by cheque failed"],
         "search_queries": ["cheque bounce dishonor", "negotiable instruments cheque", "cheque dishonour punishment"],
@@ -160,6 +166,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "accident",
         "keywords": ["accident", "crash", "collision", "motor", "vehicle", "car", "bike", "injury", "insurance", "claim"],
+        "keywords_dev": ["दुर्घटना", "गाडी", "मोटर", "सवारी", "बाइक", "कार", "चोट", "बीमा", "दाबी", "मुआब्जा", "सवारी साधन", "ट्राफिक"],
         "vernacular": ["durghatana", "bike accident", "gadi ko accident", "insurance claim", "chot", "sawari sadhan"],
         "intent_phrases": ["vehicle accident", "bike crash", "car collision", "accident injury", "insurance claim for accident", "hit and run"],
         "search_queries": ["motor vehicle accident", "accident compensation claim", "insurance claim", "road accident liability"],
@@ -173,6 +180,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "bail",
         "keywords": ["bail", "bond", "release", "surety", "jail", "prison", "released"],
+        "keywords_dev": ["जमानत", "जेल", "कैद", "रिहा", "रिहाइ", "हिरासत", "छुट्टी", "थाना", "अदालत", "धरौटी", "मुद्दा"],
         "vernacular": ["jamanat", "chhutti", "riha", "jail bata", "bond", "surety"],
         "intent_phrases": ["need bail", "someone in jail", "bail application", "release from custody", "surety bond", "how to get bail"],
         "search_queries": ["bail application procedure", "surety bond release", "bail conditions"],
@@ -186,6 +194,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "right_to_info",
         "keywords": ["information", "rti", "freedom of information", "government record", "transparency", "public authority"],
+        "keywords_dev": ["सूचना", "सूचनाको अधिकार", "जानकारी", "सरकारी", "सार्वजनिक", "अधिकार", "निवेदन", "उत्तर", "फाइल"],
         "vernacular": ["jankari", "jaankaari", "rti", "sarkari jaankari", "adhikar", "soochana"],
         "intent_phrases": ["right to information", "government not giving info", "file RTI", "access government records", "transparency in government"],
         "search_queries": ["right to information government", "freedom of information public authority", "RTI application"],
@@ -199,6 +208,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "police_harassment",
         "keywords": ["police harass", "police bribe", "bribe demand", "police extortion", "cop bribe", "police misbehave", "police misconduct", "illegal detention", "fake case", "police torture"],
+        "keywords_dev": ["प्रहरी", "पुलिस", "घुस", "सताउने", "धम्की", "गाली", "मारपिट", "कुटपिट", "गिरफ्तारी", "हिरासत", "कारबाही", "उत्पीडन", "झूटो मुद्दा"],
         "vernacular": ["police bribe", "ghoos", "police satayo", "police ne maar", "jhojho case", "illegal pakad", "police prahar"],
         "intent_phrases": ["police asking for bribe", "police harassing me", "police beating in custody", "fake case filed by police", "police demanding money", "illegal police detention"],
         "search_queries": ["police misconduct harassment", "bribery extortion", "police complaint", "police accountability"],
@@ -212,6 +222,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "tenant_issues",
         "keywords": ["tenant", "landlord", "evict", "eviction", "deposit", "security deposit", "rent increase", "rental agreement", "lease agreement", "evict me", "kick out"],
+        "keywords_dev": ["भाडा", "भाडाटिका", "किराया", "कोठा", "घर", "पसल", "निकासी", "निकाल्यो", "निकाल्द्यो", "धरौटी", "जग्गा", "सम्झौता", "लिखत", "ठेक्का", "भाडा बढ्यो"],
         "vernacular": ["kiraya", "bhadatitika", "landlord le nikalyo", "ghar khaali gar", "jagir bata nikalyo", "deposit ferra", "kiraaya badhyo", "chimeki le ghar bata nikaldyo", "nikaldyo"],
         "intent_phrases": ["landlord evicting me", " kicked me out", "eviction from house", "security deposit not returned", "rent increased suddenly", "rental agreement dispute", "neighbor kicked me out", "someone threw me out of house", "ghar bata nikaldyo", "forced to leave house"],
         "search_queries": ["tenant rights eviction", "security deposit landlord", "rental agreement rights", "eviction procedure tenant"],
@@ -225,6 +236,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "traffic_stop",
         "keywords": ["traffic", "traffic police", "traffic fine", "challan", "license", "driving", "drunk driving", "speed", "traffic violation", "vehicle seized", "vehicle impound"],
+        "keywords_dev": ["ट्राफिक", "सवारी", "जरिवाना", "चालान", "लाइसेन्स", "गाडी", "रोक्यो", "मादक पदार्थ", "मापसे", "दुर्घटना", "नियम", "उल्लंघन"],
         "vernacular": ["traffic", "challan", "license", "drunk driving", "fine", "gaadi pakdyo", "traffic le rokyo", "speed ma"],
         "intent_phrases": ["traffic police stopped me", "got a traffic challan", "license suspended", "vehicle seized by police", "drunk driving charge", "traffic fine too high"],
         "search_queries": ["traffic violation rights", "traffic police stop", "driving licence", "traffic fine challenge"],
@@ -238,6 +250,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "medical_negligence",
         "keywords": ["doctor", "hospital", "medical", "negligence", "wrong treatment", "surgery", "medical error", "overcharge", "hospital bill", "emergency treatment", "medical records"],
+        "keywords_dev": ["डाक्टर", "अस्पताल", "चिकित्सा", "लापरवाही", "उपचार", "औषधि", "बिरामी", "शल्यक्रिया", "स्वास्थ्य", "बीमा", "गलत उपचार", "जाँच"],
         "vernacular": ["doctor galat ilaj", "hospital bill", "medical negligence", "overcharge hospital", "surgery gayat", "treatment galat"],
         "intent_phrases": ["doctor gave wrong treatment", "hospital overcharging", "medical negligence", "surgery went wrong", "hospital not giving records", "medical malpractice"],
         "search_queries": ["medical negligence malpractice", "hospital overcharge", "doctor wrong treatment", "medical consumer complaint"],
@@ -251,6 +264,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "neighbor_dispute",
         "keywords": ["neighbor", "neighbour", "noise", "boundary", "encroachment", "fence", "wall", "tree", "drainage", "nuisance", "disturbance", "loud music"],
+        "keywords_dev": ["छिमेकी", "छिमेकी विवाद", "सीमा", "पर्खाल", "जग्गा", "घर", "रुख", "हल्ला", "गन्ध", "फोहोर", "पानी", "नाली", "गाली", "झैझगडा"],
         "vernacular": ["chimeki", "chhimeki", "chimiki", "naakaa", "ghar ko bhmitti", "pako ko jagga", "boundary dispute", "ghar bata hataayo"],
         "intent_phrases": ["neighbor dispute", "neighbor encroaching boundary", "neighbor making noise", "neighbor built on my land", "boundary wall dispute", "chimeki le ghar bata nikaldyo", "neighbor threw me out"],
         "search_queries": ["neighbor dispute boundary", "noise nuisance", "property encroachment neighbor", "boundary dispute resolution"],
@@ -264,6 +278,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "government_service",
         "keywords": ["government service", "government office", "bribe", "rti", "delay", "application pending", "file pending", "government delay", "public service", "grievance"],
+        "keywords_dev": ["सरकार", "सरकारी", "सार्वजनिक", "निवेदन", "फाइल", "ढिलाइ", "अनुमति", "दर्ता", "घुस", "सुझाव", "उजुरी", "गुनासो", "भत्ता", "सुविधा"],
         "vernacular": ["sarkari karyalaya", "sarkari daak", "bribe sarkar", "aavedan pending", "sarkari kaam", "grievance"],
         "intent_phrases": ["government office not responding", "application pending for months", "government service delay", "bribe demanded at government office", "file stuck in government office"],
         "search_queries": ["government service delay", "public service grievance", "right to information government"],

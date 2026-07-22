@@ -142,6 +142,39 @@ function getSourceName(key?: string): string {
   return DOC_NAMES[key] || key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+const SAMPLE_LAW_TAGS: Record<string, { label: string; query: string }[]> = {
+  en: [
+    { label: "📜 Constitution of Nepal 2072", query: "Constitution of Nepal 2072" },
+    { label: "⚖️ Nepal Penal Code 2074", query: "Nepal Penal Code 2074" },
+    { label: "🏠 Transfer of Property", query: "Transfer of Property Act" },
+    { label: "👷 Labour Act 2074", query: "Labour Act 2074" },
+    { label: "🛡️ Fundamental Rights", query: "Fundamental Rights" },
+    { label: "🔍 Criminal Procedure Code", query: "Criminal Procedure Code 2074" },
+    { label: "📋 Nepal Civil Code 2074", query: "Nepal Civil Code 2074" },
+    { label: "📄 Right to Information", query: "Right to Information Act" },
+  ],
+  ne: [
+    { label: "📜 नेपालको संविधान २०७२", query: "नेपालको संविधान २०७२" },
+    { label: "⚖️ मुलुकी अपराध संहिता २०७४", query: "मुलुकी अपराध संहिता २०७४" },
+    { label: "🏠 सम्पत्ति हस्तान्तरण ऐन", query: "सम्पत्ति हस्तान्तरण ऐन" },
+    { label: "👷 श्रम ऐन २०७४", query: "श्रम ऐन २०७४" },
+    { label: "🛡ी मौलिक हक", query: "मौलिक हक" },
+    { label: "🔍 फौजदारी प्रक्रिया संहिता २०७४", query: "फौजदारी प्रक्रिया संहिता २०७४" },
+    { label: "📋 मुलुकी देवानी संहिता २०७४", query: "मुलुकी देवानी संहिता २०७४" },
+    { label: "📄 सूचनाको हक ऐन", query: "सूचनाको हक ऐन" },
+  ],
+  hi: [
+    { label: "📜 नेपाल का संविधान २०७२", query: "नेपाल का संविधान २०७२" },
+    { label: "⚖ी नेपाल दंड संहिता २०७४", query: "नेपाल दंड संहिता २०७४" },
+    { label: "🏠 संपत्ति अंतरण अधिनियम", query: "संपत्ति अंतरण अधिनियम" },
+    { label: "👷 श्रम अधिनियम २०७४", query: "श्रम अधिनियम २०७४" },
+    { label: "🛡ी मौलिक अधिकार", query: "मौलिक अधिकार" },
+    { label: "🔍 आपराधिक प्रक्रिया संहिता", query: "आपराधिक प्रक्रिया संहिता" },
+    { label: "📋 नेपाल नागरिक संहिता २०७४", query: "नेपाल नागरिक संहिता २०७४" },
+    { label: "📄 सूचना का अधिकार अधिनियम", query: "सूचना का अधिकार अधिनियम" },
+  ],
+};
+
 const selectClass = "px-3 py-2 border border-gray-200 rounded-xl text-xs bg-white focus:ring-2 focus:ring-cyan-500 outline-none transition-all hover:border-gray-300";
 
 function LawsPageContent() {
@@ -159,6 +192,7 @@ function LawsPageContent() {
   const [popularLaws, setPopularLaws] = useState<PopularLaw[]>([]);
   const [recentLaws, setRecentLaws] = useState<RecentLaw[]>([]);
   const [activeTab, setActiveTab] = useState<"browse" | "popular" | "recent">("browse");
+  const [categoriesOpen, setCategoriesOpen] = useState(true);
   const [page, setPage] = useState(0);
   const [totalLaws, setTotalLaws] = useState(0);
   const [sortBy, setSortBy] = useState("relevance");
@@ -377,6 +411,21 @@ function LawsPageContent() {
               ))}
             </select>
           </div>
+
+          {/* Sample law search tags — localized */}
+          {!hasActiveQuery && (
+            <div className="mt-5 flex flex-wrap gap-2">
+              {(SAMPLE_LAW_TAGS[locale] || SAMPLE_LAW_TAGS.en).map((tag, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setQuery(tag.query); setTimeout(doSearch, 50); }}
+                  className="text-[11px] px-3 py-1.5 rounded-full bg-white/10 text-white/80 hover:bg-white/20 transition-colors"
+                >
+                  {tag.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -508,34 +557,54 @@ function LawsPageContent() {
                 </div>
               </div>
             ) : (
-              /* Full category grid when idle */
+              /* Full category grid when idle — collapsible */
               <div className="mb-6">
-                <h2 className="text-sm font-semibold text-gray-700 mb-3">{translate("laws.categories.title")}</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                  {categories.map((cat) => {
-                    const color = CAT_COLORS[cat.name] || "bg-gray-50 text-gray-600 border-gray-100";
-                    const icon = CAT_ICONS[cat.name] || "📖";
-                    const isSelected = category === cat.name;
-                    return (
-                      <button
-                        key={cat.name}
-                        onClick={() => handleCategoryClick(cat.name)}
-                        className={`p-3 rounded-xl border-2 transition-all duration-200 text-left ${
-                          isSelected
-                            ? "border-cyan-500 bg-cyan-50 shadow-md"
-                            : "border-gray-100 bg-white hover:shadow-md hover:border-cyan-200"
-                        }`}
-                      >
-                        <div className="text-xl mb-1">{icon}</div>
-                        <h3 className="font-semibold text-sm text-gray-900">{CAT_LABELS[cat.name]?.[locale] || cat.name}</h3>
-                        <p className="text-[10px] text-gray-500 mt-0.5">{cat.count} {translate("laws.provisions")}</p>
-                        <div className="flex gap-2 mt-1">
-                          {cat.countries.nepal && <span className="text-[9px] text-gray-400">🇳🇵 {cat.countries.nepal}</span>}
-                          {cat.countries.india && <span className="text-[9px] text-gray-400">🇮🇳 {cat.countries.india}</span>}
-                        </div>
-                      </button>
-                    );
-                  })}
+                <button
+                  onClick={() => setCategoriesOpen(!categoriesOpen)}
+                  className="w-full flex items-center justify-between gap-2 mb-3 group"
+                >
+                  <h2 className="text-sm font-semibold text-gray-700 group-hover:text-gray-900 transition-colors">
+                    {translate("laws.categories.title")}
+                    <span className="text-xs font-normal text-gray-400 ml-1.5">({categories.length})</span>
+                  </h2>
+                  <svg
+                    className={`w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-all duration-200 ${
+                      categoriesOpen ? "rotate-180" : ""
+                    }`}
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                  </svg>
+                </button>
+                <div className={`transition-all duration-300 overflow-hidden ${
+                  categoriesOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+                }`}>
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                    {categories.map((cat) => {
+                      const color = CAT_COLORS[cat.name] || "bg-gray-50 text-gray-600 border-gray-100";
+                      const icon = CAT_ICONS[cat.name] || "📖";
+                      const isSelected = category === cat.name;
+                      return (
+                        <button
+                          key={cat.name}
+                          onClick={() => handleCategoryClick(cat.name)}
+                          className={`p-3 rounded-xl border-2 transition-all duration-200 text-left ${
+                            isSelected
+                              ? "border-cyan-500 bg-cyan-50 shadow-md"
+                              : "border-gray-100 bg-white hover:shadow-md hover:border-cyan-200"
+                          }`}
+                        >
+                          <div className="text-xl mb-1">{icon}</div>
+                          <h3 className="font-semibold text-sm text-gray-900">{CAT_LABELS[cat.name]?.[locale] || cat.name}</h3>
+                          <p className="text-[10px] text-gray-500 mt-0.5">{cat.count} {translate("laws.provisions")}</p>
+                          <div className="flex gap-2 mt-1">
+                            {cat.countries.nepal && <span className="text-[9px] text-gray-400">🇳🇵 {cat.countries.nepal}</span>}
+                            {cat.countries.india && <span className="text-[9px] text-gray-400">🇮🇳 {cat.countries.india}</span>}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             )}

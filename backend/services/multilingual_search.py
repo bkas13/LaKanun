@@ -305,16 +305,82 @@ DEVANAGARI_TO_ENGLISH: Dict[str, List[str]] = {
     "धोखा": ["fraud", "cheating", "deception"],
     "ठगी": ["fraud", "cheating", "scam"],
     
-    # Civil Law
+    # Inheritance & Succession
+    "उत्तराधिकार": ["inheritance", "succession", "heir"],
+    "उत्तराधिकारी": ["heir", "successor", "inheritor"],
+    "विरासत": ["inheritance", "legacy", "heritage"],
+    "पुस्तैनी": ["ancestral", "hereditary"],
+    "वसियतनामा": ["will", "testament"],
+    "वसियत": ["will", "testament", "bequest"],
+    "हक": ["right", "entitlement", "claim"],
+    "हकदार": ["heir", "entitled person", "claimant"],
+    "वारिस": ["heir", "legal heir", "successor"],
+    "अंश": ["share", "portion", "partition", "inheritance share"],
+    "भाग": ["share", "part", "portion"],
+    "बाँडफाँड": ["distribution", "division", "partition"],
+    "अंशबन्डा": ["partition", "inheritance division"],
+
+    # Family & Relationships
+    "बुबा": ["father"],
+    "पिता": ["father"],
+    "बाबु": ["father"],
+    "आमा": ["mother"],
+    "भाइ": ["brother"],
+    "दाइ": ["elder brother"],
+    "बहिनी": ["sister"],
+    "दिदी": ["elder sister"],
+    "दाजुभाइ": ["brothers", "siblings"],
+    "भाइबहिनी": ["siblings", "brothers and sisters"],
+    "छोरा": ["son"],
+    "छोरी": ["daughter"],
+    "सन्तान": ["children", "offspring"],
+    "परिवार": ["family"],
+    "श्रीमान": ["husband"],
+    "श्रीमती": ["wife"],
+    "पति": ["husband", "spouse"],
+    "पत्नी": ["wife"],
+    "बीवी": ["wife", "spouse"],
+
+    # Death & Related
+    "मृत्यु": ["death", "demise"],
+    "मरे": ["died", "dead"],
+    "मृतक": ["deceased", "dead person"],
+    "मरण": ["death"],
+    "गुम्नुभयो": ["died", "passed away", "deceased"],
+    "गुमाए": ["lost", "bereaved"],
+
+    # Disputes & Conflict
+    "झगडा": ["dispute", "fight", "conflict"],
+    "विवाद": ["dispute", "conflict", "controversy"],
+    "लडाइ": ["fight", "quarrel"],
+    "लफडा": ["dispute", "trouble", "quarrel"],
+    "मारपीट": ["assault", "fighting", "beating"],
+
+    # Property (with inflected forms)
     "सम्पत्ति": ["property", "assets"],
+    "सम्पत्तिमा": ["property", "in property"],
+    "सम्पत्तिको": ["property", "of property"],
+    "सम्पत्तिहरू": ["property", "properties"],
     "जग्गा": ["land", "property", "plot"],
     "जमिन": ["land", "ground", "property"],
     "घर": ["house", "home", "dwelling"],
+    "घरघडेरी": ["house", "property", "real estate"],
+    "जग्गाजमिन": ["land", "property", "land property"],
+
+    # Legal Procedure
+    "मुद्दा": ["case", "lawsuit", "suit"],
+    "उजुरी": ["complaint", "petition", "plaint"],
+    "न्याय": ["justice"],
+    "फैसला": ["judgment", "decision", "verdict"],
+    "आदेश": ["order", "direction"],
+    "निर्णय": ["decision", "ruling", "verdict"],
+
+    # Marriage & Family Law
     "विवाह": ["marriage", "wedding"],
     "तलाक": ["divorce"],
     "विवाह विच्छेद": ["divorce", "matrimonial"],
-    "पति": ["husband", "spouse"],
-    "बीवी": ["wife", "spouse"],
+    "सम्बन्ध विच्छेद": ["divorce", "separation"],
+    "बाल": ["child", "minor"],
     "बच्चा": ["child", "minor", "children"],
     "अनुबन्ध": ["contract", "agreement"],
     "समझौता": ["agreement", "contract", "settlement"],
@@ -381,6 +447,62 @@ DEVANAGARI_TO_ENGLISH: Dict[str, List[str]] = {
 }
 
 
+# ── Nepali Inflection Handling ──────────────────────────────────────
+
+# Common Nepali suffixes to strip for dictionary lookup (in order of length)
+NEPALI_SUFFIXES = [
+    "हरूबाट", "हरूले", "हरूमा", "हरूको", "हरूका", "हरूलाई",
+    "बाट", "लाई", "ले", "मा", "को", "का", "की",
+    "हरू",
+]
+
+# Common Nepali noun inflections that change the word ending
+# Maps inflected endings to base endings
+NEPALI_INFLECTION_MAP = {
+    "हरू": "",       # plural
+    "हरुलाई": "हरू",  # plural + dative
+    "हरूले": "हरू",  # plural + ergative
+    "हरूमा": "हरू",  # plural + locative
+    "हरूको": "हरू",  # plural + genitive
+    "हरूका": "हरू",  # plural + genitive
+    "हरूबाट": "हरू", # plural + ablative
+    "मा": "",
+    "ले": "",
+    "को": "",
+    "का": "",
+    "की": "",
+    "बाट": "",
+    "लाई": "",
+    "संग": "",
+    "सँग": "",
+}
+
+
+def _stem_nepali_word(word: str) -> List[str]:
+    """Strip common Nepali suffixes to find the base form for dictionary lookup.
+    
+    Returns the original word and possible base forms (with suffixes stripped).
+    """
+    candidates = [word]
+    
+    # Try stripping one suffix at a time
+    for suffix in sorted(NEPALI_SUFFIXES, key=len, reverse=True):
+        if word.endswith(suffix) and len(word) > len(suffix) + 1:
+            base = word[: -len(suffix)]
+            candidates.append(base)
+            # Handle vowel harmony: आ + मा = आमा (no change needed for मा)
+    
+    # Also try common irregular forms
+    # सम्पत्तिमा → सम्पत्ति (but only if सम्पत्ति is a known word)
+    for suffix, replacement in NEPALI_INFLECTION_MAP.items():
+        if word.endswith(suffix) and len(word) > len(suffix) + 1:
+            candidate = word[: -len(suffix)] + replacement
+            if candidate != word:
+                candidates.append(candidate)
+    
+    return candidates
+
+
 # ── Query Translation ───────────────────────────────────────────────
 
 def translate_query(query: str) -> Tuple[str, str, List[str]]:
@@ -403,8 +525,8 @@ def translate_query(query: str) -> Tuple[str, str, List[str]]:
     return "en", query, [query]
 
 
-def _translate_devanagari(query: str) -> Tuple[str, List[str]]:
-    """Translate Devanagari script query to English terms."""
+def _translate_devanagari(query: str) -> Tuple[str, str, List[str]]:
+    """Translate Devanagari script query to English terms with inflection handling."""
     words = query.split()
     all_terms = []
     english_parts = []
@@ -428,14 +550,19 @@ def _translate_devanagari(query: str) -> Tuple[str, List[str]]:
         if not matched:
             i += 1
     
-    # Single word matches for unmatched words
+    # Single word matches for unmatched words (with inflection)
     for i, word in enumerate(words):
         if i not in matched_positions:
-            if word in DEVANAGARI_TO_ENGLISH:
-                translations = DEVANAGARI_TO_ENGLISH[word]
-                all_terms.extend(translations)
-                english_parts.extend(translations)
-            elif len(word) > 2:
+            candidates = _stem_nepali_word(word)
+            found = False
+            for candidate in candidates:
+                if candidate in DEVANAGARI_TO_ENGLISH:
+                    translations = DEVANAGARI_TO_ENGLISH[candidate]
+                    all_terms.extend(translations)
+                    english_parts.extend(translations)
+                    found = True
+                    break
+            if not found and len(word) > 2:
                 all_terms.append(word)
     
     english_query = " ".join(english_parts) if english_parts else query

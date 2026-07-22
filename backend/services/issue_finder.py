@@ -26,6 +26,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "arrested",
         "keywords": ["arrested", "arrest", "police", "custody", "detained", "detention", "picked up", "taken in"],
+        "keywords_dev": ["गिरफ्तारी", "पुलिस", "थाना", "कैद", "हिरासत", "प्रहरी", "पक्राउ", "पक्रे", "जमानत"],
         "vernacular": ["girftari", "giraftari", "qaid", "police le pakro", "police le lagyo", "thana", "hirasat"],
         "intent_phrases": ["police took me", "police picked up", "someone arrested", "in custody", "taken to thana", "police holding"],
         "search_queries": ["arrest detention police custody", "right against arrest", "bail custody", "arrest procedure rights"],
@@ -39,6 +40,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "domestic_violence",
         "keywords": ["domestic", "violence", "wife", "husband", "abuse", "beating", "harassment", "stridhan", "dowry"],
+        "keywords_dev": ["हिंसा", "मारपीट", "पत्नी", "श्रीमती", "पति", "श्रीमान", "दहेज", "गाली", "धम्की", "घरेलु", "कुटपिट"],
         "vernacular": ["gharelu hinsa", "biwile maar", "patile maar", "dahej", "tikun", "jhidak", "gali", "marpit"],
         "intent_phrases": ["husband beats me", "wife is being abused", "in-laws harassing", "dowry harassment", "physical abuse at home", "family violence"],
         "search_queries": ["domestic violence spouse abuse", "protection order wife", "harassment domestic", "dowry prohibition"],
@@ -52,6 +54,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "property_dispute",
         "keywords": ["property", "land", "house", "building", "encroachment", "partition", "ancestral", "zamin", "jagga"],
+        "keywords_dev": ["सम्पत्ति", "सम्पत्तिमा", "सम्पत्तिको", "जग्गा", "जमिन", "घर", "झगडा", "विवाद", "पुस्तैनी", "जग्गाजमिन", "घरघडेरी"],
         "vernacular": ["jagga ko mamla", "ghar ko mamla", "zamin ko vivad", "bhitra chhutyeko", "jagga chiniyo", "kabja", "chhincha"],
         "intent_phrases": ["someone took my land", "property dispute", "encroached on my property", "ancestral property division", "house ownership dispute", "land grabbing"],
         "search_queries": ["property rights land ownership", "partition ancestral property", "encroachment property dispute", "land title ownership"],
@@ -91,6 +94,7 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "inheritance",
         "keywords": ["inheritance", "succession", "will", "heir", "estate", "father", "mother", "died", "death", "property after death"],
+        "keywords_dev": ["उत्तराधिकार", "उत्तराधिकारी", "विरासत", "पुस्तैनी", "वसियतनामा", "हक", "हकदार", "वारिस", "अंश", "अंशबन्डा", "बाँडफाँड", "बुबा", "पिता", "आमा", "मृत्यु", "गुम्नुभयो", "मृतक", "भाइबहिनी", "सम्पत्ति"],
         "vernacular": ["virasat", "uttradhikar", "baap ko sampatti", "mritak ko sampatti", "warisan", "will"],
         "intent_phrases": ["father died property", "inheritance after death", "who gets the property", "succession rights", "will and testament", "legal heir property"],
         "search_queries": ["inheritance succession property", "will testament heirs", "intestate succession", "legal heir rights"],
@@ -341,6 +345,11 @@ def identify_issue(description: str) -> Optional[dict]:
                 if any(kw_part in tw or tw in kw_part for kw_part in kw_words if len(kw_part) >= 3):
                     translated_used.add(tw)
                     score += 1.5
+
+        # 5. Devanagari keyword matching — matches direct Devanagari text in the description
+        for kw_dev in pattern.get("keywords_dev", []):
+            if kw_dev in desc_lower:
+                score += len(kw_dev) * 0.4  # Longer Devanagari words = more specific, weighted
 
         if score > best_score:
             best_score = score

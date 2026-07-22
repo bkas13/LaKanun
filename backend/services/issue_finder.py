@@ -2,20 +2,33 @@
 
 Given a natural language description of a legal issue, finds all applicable
 provisions across Nepal and India laws and structures them into a brief.
+
+Enhanced with:
+- Romanized/vernacular keyword matching (Nepali/Hindi transliterations)
+- Multilingual query translation before matching
+- Intent phrase matching for natural language descriptions
 """
 
-from typing import Optional
+from typing import Optional, List, Tuple
 from backend.services.law import law_service
+from backend.services.multilingual_search import translate_query, ROMANIZED_MAP, DEVANAGARI_TO_ENGLISH
 
 
 # ── Scenario Patterns ───────────────────────────────────────────────────
-# Maps common issue descriptions to legal topic clusters
+# Maps common issue descriptions to legal topic clusters.
+# Each pattern now includes:
+#   - keywords: English keywords (original)
+#   - vernacular: romanized Nepali/Hindi phrases that describe the same issue
+#   - intent_phrases: natural language descriptions users might type
+#   - search_queries: optimized English search queries for law retrieval
 
 ISSUE_PATTERNS: list[dict] = [
     {
         "id": "arrested",
         "keywords": ["arrested", "arrest", "police", "custody", "detained", "detention", "picked up", "taken in"],
-        "search_queries": ["arrest detention police custody", "right against arrest", "bail custody"],
+        "vernacular": ["girftari", "giraftari", "qaid", "police le pakro", "police le lagyo", "thana", "hirasat"],
+        "intent_phrases": ["police took me", "police picked up", "someone arrested", "in custody", "taken to thana", "police holding"],
+        "search_queries": ["arrest detention police custody", "right against arrest", "bail custody", "arrest procedure rights"],
         "categories": ["arrest_and_bail", "criminal_procedure_general"],
         "title": {
             "en": "Arrest & Police Custody",
@@ -26,7 +39,9 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "domestic_violence",
         "keywords": ["domestic", "violence", "wife", "husband", "abuse", "beating", "harassment", "stridhan", "dowry"],
-        "search_queries": ["domestic violence spouse abuse", "protection order wife", "harassment"],
+        "vernacular": ["gharelu hinsa", "biwile maar", "patile maar", "dahej", "tikun", "jhidak", "gali", "marpit"],
+        "intent_phrases": ["husband beats me", "wife is being abused", "in-laws harassing", "dowry harassment", "physical abuse at home", "family violence"],
+        "search_queries": ["domestic violence spouse abuse", "protection order wife", "harassment domestic", "dowry prohibition"],
         "categories": ["domestic_violence_general"],
         "title": {
             "en": "Domestic Violence & Family Abuse",
@@ -36,8 +51,10 @@ ISSUE_PATTERNS: list[dict] = [
     },
     {
         "id": "property_dispute",
-        "keywords": ["property", "land", "house", "building", "encroachment", "eviction", "tenant", "rent", "lease", "partition", "ancestral"],
-        "search_queries": ["property rights land ownership", "tenant eviction lease", "partition ancestral property"],
+        "keywords": ["property", "land", "house", "building", "encroachment", "partition", "ancestral", "zamin", "jagga"],
+        "vernacular": ["jagga ko mamla", "ghar ko mamla", "zamin ko vivad", "bhitra chhutyeko", "jagga chiniyo", "kabja", "chhincha"],
+        "intent_phrases": ["someone took my land", "property dispute", "encroached on my property", "ancestral property division", "house ownership dispute", "land grabbing"],
+        "search_queries": ["property rights land ownership", "partition ancestral property", "encroachment property dispute", "land title ownership"],
         "categories": ["property_law", "transfer_of_property_general"],
         "title": {
             "en": "Property & Land Disputes",
@@ -47,8 +64,10 @@ ISSUE_PATTERNS: list[dict] = [
     },
     {
         "id": "workplace",
-        "keywords": ["work", "job", "employer", "fired", "terminated", "wages", "salary", "injury", "accident", "worker", "employee", "labor", "labour"],
-        "search_queries": ["employment wages termination", "workplace injury compensation", "worker rights labor"],
+        "keywords": ["work", "job", "employer", "fired", "terminated", "wages", "salary", "injury", "worker", "employee", "labor", "labour"],
+        "vernacular": ["nokri", "jyala", "majdur", "kaam", "lagadhari", "jagire", "naukri chhodyo", "tankhwah", "pesi"],
+        "intent_phrases": ["employer fired me", "not paying wages", "salary not given", "workplace injury", "lost my job", "employer exploiting", "no salary increment"],
+        "search_queries": ["employment wages termination", "workplace injury compensation", "worker rights labor", "wrongful termination"],
         "categories": ["labor_general", "wages_and_payment", "occupational_safety"],
         "title": {
             "en": "Employment & Workplace Issues",
@@ -59,7 +78,9 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "consumer",
         "keywords": ["consumer", "product", "defective", "refund", "shop", "bought", "purchase", "service", "complaint", "warranty"],
-        "search_queries": ["consumer protection defective product", "refund warranty complaint"],
+        "vernacular": ["kharid", "defective product", "paisa firta", "warranty", "complaint", "samaan bigriyo"],
+        "intent_phrases": ["bought defective product", "shop not giving refund", "product not working", "consumer complaint", "service not provided", "warranty claim denied"],
+        "search_queries": ["consumer protection defective product", "refund warranty complaint", "consumer rights defect"],
         "categories": ["consumer_protection_general", "consumer_complaints"],
         "title": {
             "en": "Consumer Complaints",
@@ -70,7 +91,9 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "inheritance",
         "keywords": ["inheritance", "succession", "will", "heir", "estate", "father", "mother", "died", "death", "property after death"],
-        "search_queries": ["inheritance succession property", "will testament heirs"],
+        "vernacular": ["virasat", "uttradhikar", "baap ko sampatti", "mritak ko sampatti", "warisan", "will"],
+        "intent_phrases": ["father died property", "inheritance after death", "who gets the property", "succession rights", "will and testament", "legal heir property"],
+        "search_queries": ["inheritance succession property", "will testament heirs", "intestate succession", "legal heir rights"],
         "categories": ["inheritance_and_succession"],
         "title": {
             "en": "Inheritance & Succession",
@@ -81,7 +104,9 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "child",
         "keywords": ["child", "minor", "kidnapping", "abduction", "custody", "adoption", "abuse", "child labor", "school"],
-        "search_queries": ["child protection minor rights", "custody guardianship adoption", "child labor exploitation"],
+        "vernacular": ["bachcha", "bal", "apaharan", "harayeko bachcha", "bachcha ko haq", "paalana"],
+        "intent_phrases": ["child custody", "kidnapped child", "child labor", "minor rights", "child abuse", "adoption process", "child not going to school"],
+        "search_queries": ["child protection minor rights", "custody guardianship adoption", "child labor exploitation", "juvenile justice"],
         "categories": ["child_protection", "juvenile_justice_general"],
         "title": {
             "en": "Child Protection & Welfare",
@@ -92,7 +117,9 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "marriage_divorce",
         "keywords": ["marriage", "divorce", "wedding", "spouse", "alimony", "maintenance", "matrimonial", "bigamy"],
-        "search_queries": ["marriage divorce spousal rights", "alimony maintenance", "matrimonial dispute"],
+        "vernacular": ["byaah", "talaq", "vivah", "alimony", "bivaha bhangai", "kharcha paani", "dampati"],
+        "intent_phrases": ["want divorce", "marriage problems", "spouse not maintaining", "alimony rights", "domestic marriage dispute", "second marriage illegal"],
+        "search_queries": ["marriage divorce spousal rights", "alimony maintenance", "matrimonial dispute", "divorce procedure"],
         "categories": ["marriage_and_family"],
         "title": {
             "en": "Marriage & Divorce",
@@ -103,7 +130,9 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "cyber_fraud",
         "keywords": ["online", "cyber", "hack", "phishing", "fraud", "scam", "internet", "digital", "email", "password", "stolen online"],
-        "search_queries": ["cyber crime online fraud", "digital evidence", "hacking data theft"],
+        "vernacular": ["online thagi", "dhoka", "hack", "phishing", "password chori", "online fraud", "internet fraud"],
+        "intent_phrases": ["online fraud happened", "someone hacked my account", "password stolen", "online scam", "digital fraud", "email phishing"],
+        "search_queries": ["cyber crime online fraud", "digital evidence", "hacking data theft", "information technology offence"],
         "categories": ["cyber_crime", "information_technology_general", "computer_offences"],
         "title": {
             "en": "Online Fraud & Cybercrime",
@@ -114,7 +143,9 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "cheque_bounce",
         "keywords": ["cheque", "check", "bounce", "bounced", "dishonor", "insufficient", "bank"],
-        "search_queries": ["cheque bounce dishonor", "negotiable instruments cheque"],
+        "vernacular": ["cheque bounce", "check bounce", "cheque dishonor", "paisa chhodyena bank"],
+        "intent_phrases": ["cheque bounced", "cheque dishonored", "bank returned cheque", "insufficient funds cheque", "payment by cheque failed"],
+        "search_queries": ["cheque bounce dishonor", "negotiable instruments cheque", "cheque dishonour punishment"],
         "categories": ["cheque_bounce", "negotiable_instruments_general"],
         "title": {
             "en": "Cheque Bounce / Dishonored Payment",
@@ -125,7 +156,9 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "accident",
         "keywords": ["accident", "crash", "collision", "motor", "vehicle", "car", "bike", "injury", "insurance", "claim"],
-        "search_queries": ["motor vehicle accident", "accident compensation claim", "insurance claim"],
+        "vernacular": ["durghatana", "bike accident", "gadi ko accident", "insurance claim", "chot", "sawari sadhan"],
+        "intent_phrases": ["vehicle accident", "bike crash", "car collision", "accident injury", "insurance claim for accident", "hit and run"],
+        "search_queries": ["motor vehicle accident", "accident compensation claim", "insurance claim", "road accident liability"],
         "categories": ["accidents", "accident_claims", "motor_vehicles_general"],
         "title": {
             "en": "Motor Vehicle Accidents & Insurance",
@@ -135,8 +168,10 @@ ISSUE_PATTERNS: list[dict] = [
     },
     {
         "id": "bail",
-        "keywords": ["bail", "bond", "release", "surety", "custody", "jail", "prison", "released"],
-        "search_queries": ["bail application procedure", "surety bond release"],
+        "keywords": ["bail", "bond", "release", "surety", "jail", "prison", "released"],
+        "vernacular": ["jamanat", "chhutti", "riha", "jail bata", "bond", "surety"],
+        "intent_phrases": ["need bail", "someone in jail", "bail application", "release from custody", "surety bond", "how to get bail"],
+        "search_queries": ["bail application procedure", "surety bond release", "bail conditions"],
         "categories": ["arrest_and_bail"],
         "title": {
             "en": "Bail & Release from Custody",
@@ -147,7 +182,9 @@ ISSUE_PATTERNS: list[dict] = [
     {
         "id": "right_to_info",
         "keywords": ["information", "rti", "freedom of information", "government record", "transparency", "public authority"],
-        "search_queries": ["right to information government", "freedom of information public authority"],
+        "vernacular": ["jankari", "jaankaari", "rti", "sarkari jaankari", "adhikar", "soochana"],
+        "intent_phrases": ["right to information", "government not giving info", "file RTI", "access government records", "transparency in government"],
+        "search_queries": ["right to information government", "freedom of information public authority", "RTI application"],
         "categories": ["right_to_information_general", "information_access"],
         "title": {
             "en": "Right to Information",
@@ -155,31 +192,162 @@ ISSUE_PATTERNS: list[dict] = [
             "hi": "सूचना का अधिकार"
         }
     },
+    {
+        "id": "police_harassment",
+        "keywords": ["police harass", "police bribe", "bribe demand", "police extortion", "cop bribe", "police misbehave", "police misconduct", "illegal detention", "fake case", "police torture"],
+        "vernacular": ["police bribe", "ghoos", "police satayo", "police ne maar", "jhojho case", "illegal pakad", "police prahar"],
+        "intent_phrases": ["police asking for bribe", "police harassing me", "police beating in custody", "fake case filed by police", "police demanding money", "illegal police detention"],
+        "search_queries": ["police misconduct harassment", "bribery extortion", "police complaint", "police accountability"],
+        "categories": ["police_misconduct", "human_rights_violations"],
+        "title": {
+            "en": "Police Harassment or Bribery",
+            "ne": "प्रहरी सताउने वा घुस माग्ने",
+            "hi": "पुलिस उत्पीड़न या रिश्वत"
+        }
+    },
+    {
+        "id": "tenant_issues",
+        "keywords": ["tenant", "landlord", "evict", "eviction", "deposit", "security deposit", "rent increase", "rental agreement", "lease agreement", "evict me", "kick out"],
+        "vernacular": ["kiraya", "bhadatitika", "landlord le nikalyo", "ghar khaali gar", "jagir bata nikalyo", "deposit ferra", "kiraaya badhyo", "chimeki le ghar bata nikaldyo", "nikaldyo"],
+        "intent_phrases": ["landlord evicting me", " kicked me out", "eviction from house", "security deposit not returned", "rent increased suddenly", "rental agreement dispute", "neighbor kicked me out", "someone threw me out of house", "ghar bata nikaldyo", "forced to leave house"],
+        "search_queries": ["tenant rights eviction", "security deposit landlord", "rental agreement rights", "eviction procedure tenant"],
+        "categories": ["tenant_rights", "landlord_tenant"],
+        "title": {
+            "en": "Tenant Rights & Eviction",
+            "ne": "भाडाटिका अधिकार र निकासी",
+            "hi": "किरायेदार अधिकार और बेदखली"
+        }
+    },
+    {
+        "id": "traffic_stop",
+        "keywords": ["traffic", "traffic police", "traffic fine", "challan", "license", "driving", "drunk driving", "speed", "traffic violation", "vehicle seized", "vehicle impound"],
+        "vernacular": ["traffic", "challan", "license", "drunk driving", "fine", "gaadi pakdyo", "traffic le rokyo", "speed ma"],
+        "intent_phrases": ["traffic police stopped me", "got a traffic challan", "license suspended", "vehicle seized by police", "drunk driving charge", "traffic fine too high"],
+        "search_queries": ["traffic violation rights", "traffic police stop", "driving licence", "traffic fine challenge"],
+        "categories": ["traffic_offences", "motor_vehicles_general"],
+        "title": {
+            "en": "Traffic Stop & Violations",
+            "ne": "ट्राफिक रोक र उल्लंघन",
+            "hi": "ट्रैफिक रोक और उल्लंघन"
+        }
+    },
+    {
+        "id": "medical_negligence",
+        "keywords": ["doctor", "hospital", "medical", "negligence", "wrong treatment", "surgery", "medical error", "overcharge", "hospital bill", "emergency treatment", "medical records"],
+        "vernacular": ["doctor galat ilaj", "hospital bill", "medical negligence", "overcharge hospital", "surgery gayat", "treatment galat"],
+        "intent_phrases": ["doctor gave wrong treatment", "hospital overcharging", "medical negligence", "surgery went wrong", "hospital not giving records", "medical malpractice"],
+        "search_queries": ["medical negligence malpractice", "hospital overcharge", "doctor wrong treatment", "medical consumer complaint"],
+        "categories": ["medical_negligence", "consumer_protection_general"],
+        "title": {
+            "en": "Medical Negligence",
+            "ne": "चिकित्सा लापरवाही",
+            "hi": "चिकित्सा लापरवाही"
+        }
+    },
+    {
+        "id": "neighbor_dispute",
+        "keywords": ["neighbor", "neighbour", "noise", "boundary", "encroachment", "fence", "wall", "tree", "drainage", "nuisance", "disturbance", "loud music"],
+        "vernacular": ["chimeki", "chhimeki", "chimiki", "naakaa", "ghar ko bhmitti", "pako ko jagga", "boundary dispute", "ghar bata hataayo"],
+        "intent_phrases": ["neighbor dispute", "neighbor encroaching boundary", "neighbor making noise", "neighbor built on my land", "boundary wall dispute", "chimeki le ghar bata nikaldyo", "neighbor threw me out"],
+        "search_queries": ["neighbor dispute boundary", "noise nuisance", "property encroachment neighbor", "boundary dispute resolution"],
+        "categories": ["neighbor_disputes", "property_law"],
+        "title": {
+            "en": "Neighbor Disputes",
+            "ne": "छिमेकी विवाद",
+            "hi": "पड़ोसी विवाद"
+        }
+    },
+    {
+        "id": "government_service",
+        "keywords": ["government service", "government office", "bribe", "rti", "delay", "application pending", "file pending", "government delay", "public service", "grievance"],
+        "vernacular": ["sarkari karyalaya", "sarkari daak", "bribe sarkar", "aavedan pending", "sarkari kaam", "grievance"],
+        "intent_phrases": ["government office not responding", "application pending for months", "government service delay", "bribe demanded at government office", "file stuck in government office"],
+        "search_queries": ["government service delay", "public service grievance", "right to information government"],
+        "categories": ["public_service", "right_to_information_general"],
+        "title": {
+            "en": "Government Service Issues",
+            "ne": "सरकारी सेवा समस्या",
+            "hi": "सरकारी सेवा समस्या"
+        }
+    },
 ]
+
+
+def _translate_to_english(description: str) -> Tuple[str, List[str]]:
+    """Translate a description to English terms using multilingual search.
+
+    Returns (english_query, all_expanded_terms).
+    """
+    lang, english_query, all_terms = translate_query(description)
+    return english_query, all_terms
 
 
 def identify_issue(description: str) -> Optional[dict]:
     """Identify the legal issue from a natural language description.
 
+    Enhanced matching:
+    1. Direct keyword matching (English)
+    2. Vernacular keyword matching (romanized Nepali/Hindi)
+    3. Intent phrase matching (natural language)
+    4. Multilingual translation + re-matching
+
     Returns the best matching ISSUE_PATTERN or None.
     """
-    desc_lower = description.lower()
+    desc_lower = description.lower().strip()
+
+    # Step 1: Translate query to English for additional matching
+    english_query, translated_terms = _translate_to_english(description)
+    english_words = set(english_query.lower().split())
+    translated_lower = {t.lower() for t in translated_terms if len(t) >= 3}
 
     best_match = None
     best_score = 0
 
     for pattern in ISSUE_PATTERNS:
         score = 0
+
+        # 1. Direct English keyword matching
         for kw in pattern["keywords"]:
             if kw in desc_lower:
-                # Longer keyword matches are more specific
-                score += len(kw.split())
+                score += len(kw.split()) * 2  # Multi-word keywords score higher
+
+        # 2. Vernacular keyword matching
+        for vw in pattern.get("vernacular", []):
+            vw_lower = vw.lower()
+            if vw_lower in desc_lower:
+                score += len(vw_lower.split()) * 3  # Vernacular matches get bonus
+
+        # 3. Intent phrase matching (fuzzy — check if key words from intent phrase appear)
+        for phrase in pattern.get("intent_phrases", []):
+            phrase_words = [w for w in phrase.lower().split() if len(w) > 3]
+            if not phrase_words:
+                continue
+            matches = sum(1 for pw in phrase_words if pw in desc_lower)
+            if matches >= 2:
+                score += matches * 2
+            # Also check against translated terms
+            matches_translated = sum(1 for pw in phrase_words if pw in translated_lower or pw in english_words)
+            if matches_translated >= 2:
+                score += matches_translated * 1.5
+
+        # 4. Translated term matching — check if translated English words match pattern keywords
+        #    Cap: each translated term only counts once per pattern
+        translated_used = set()
+        for kw in pattern["keywords"]:
+            kw_words = kw.split()
+            for tw in translated_lower:
+                if tw in translated_used:
+                    continue
+                if any(kw_part in tw or tw in kw_part for kw_part in kw_words if len(kw_part) >= 3):
+                    translated_used.add(tw)
+                    score += 1.5
 
         if score > best_score:
             best_score = score
             best_match = pattern
 
-    if best_score == 0:
+    # Minimum threshold to consider an issue identified
+    if best_score < 2:
         return None
     return best_match
 
@@ -196,26 +364,12 @@ def find_laws_for_issue(
     issue = identify_issue(description)
 
     if issue is None:
-        # Fallback: use the description as a search query
+        # Fallback: use the description as a search query with multilingual support
         results = law_service.search(description, country=country, top_k=10)
         return {
             "issue_identified": False,
             "title": description,
-            "search_results": [
-                {
-                    "id": r["article"].get("id", ""),
-                    "title": r["article"].get("title", ""),
-                    "article_number": r["article"].get("article_number", ""),
-                    "country": r["article"].get("country", ""),
-                    "category": r["article"].get("category", ""),
-                    "document_type": r["article"].get("document_type", ""),
-                    "source_document": r["article"].get("source_document", ""),
-                    "score": r["score"],
-                    "full_text": r["article"].get("full_text", ""),
-                    "enactment_year": r["article"].get("_enactment_year", 0),
-                }
-                for r in results
-            ],
+            "search_results": _format_results(results),
             "provisions": [],
             "guidance": {
                 "en": "We couldn't identify a specific legal issue, but here are relevant search results.",
@@ -224,11 +378,16 @@ def find_laws_for_issue(
             }.get(lang, "We couldn't identify a specific legal issue, but here are relevant search results.")
         }
 
-    # Execute searches from the pattern
+    # Execute searches from the pattern — also include the original description as a search query
     all_results = []
     seen_ids = set()
 
-    for query in issue["search_queries"]:
+    # Add original description as a search query (multilingual support)
+    search_queries = list(issue["search_queries"])
+    if description.strip() not in search_queries:
+        search_queries.insert(0, description.strip())
+
+    for query in search_queries:
         results = law_service.search(query, country=country, top_k=8)
         for r in results:
             aid = r["article"].get("id", "")
@@ -243,12 +402,18 @@ def find_laws_for_issue(
                     "document_type": r["article"].get("document_type", ""),
                     "source_document": r["article"].get("source_document", ""),
                     "score": r["score"],
+                    "confidence": r.get("confidence", "low"),
+                    "citation": r.get("citation", ""),
                     "full_text": r["article"].get("full_text", ""),
                     "enactment_year": r["article"].get("_enactment_year", 0),
+                    "last_verified": r["article"].get("_last_verified", ""),
+                    "source_url": r["article"].get("_source_url", ""),
+                    "effective_date": r["article"].get("_effective_date", ""),
                 })
 
-    # Sort by score
+    # Sort by score, then deduplicate by title similarity
     all_results.sort(key=lambda x: x["score"], reverse=True)
+    all_results = _deduplicate_results(all_results)
 
     # Generate guidance based on issue type
     guidance = _get_guidance(issue["id"], lang)
@@ -261,6 +426,63 @@ def find_laws_for_issue(
         "provisions": _extract_key_provisions(all_results, country),
         "guidance": guidance,
     }
+
+
+def _format_results(results: list) -> list:
+    """Format raw search results into the standard response shape."""
+    return [
+        {
+            "id": r["article"].get("id", ""),
+            "title": r["article"].get("title", ""),
+            "article_number": r["article"].get("article_number", ""),
+            "country": r["article"].get("country", ""),
+            "category": r["article"].get("category", ""),
+            "document_type": r["article"].get("document_type", ""),
+            "source_document": r["article"].get("source_document", ""),
+            "score": r["score"],
+            "confidence": r.get("confidence", "low"),
+            "citation": r.get("citation", ""),
+            "full_text": r["article"].get("full_text", ""),
+            "enactment_year": r["article"].get("_enactment_year", 0),
+            "last_verified": r["article"].get("_last_verified", ""),
+            "source_url": r["article"].get("_source_url", ""),
+            "effective_date": r["article"].get("_effective_date", ""),
+        }
+        for r in results
+    ]
+
+
+def _deduplicate_results(results: list) -> list:
+    """Remove near-duplicate results based on title similarity."""
+    if not results:
+        return results
+
+    seen_titles: list[str] = []
+    deduped = []
+
+    for r in results:
+        title_lower = r["title"].lower().strip()
+        is_dup = False
+        for seen in seen_titles:
+            if _title_similarity(title_lower, seen) > 0.7:
+                is_dup = True
+                break
+        if not is_dup:
+            seen_titles.append(title_lower)
+            deduped.append(r)
+
+    return deduped
+
+
+def _title_similarity(a: str, b: str) -> float:
+    """Simple word-level Jaccard similarity between two titles."""
+    words_a = set(a.split())
+    words_b = set(b.split())
+    if not words_a or not words_b:
+        return 0.0
+    intersection = words_a & words_b
+    union = words_a | words_b
+    return len(intersection) / len(union) if union else 0.0
 
 
 def _extract_key_provisions(results: list, country: Optional[str] = None) -> list:
@@ -306,6 +528,16 @@ def _get_guidance(issue_id: str, lang: str = "en") -> str:
             "en": "For property disputes: (1) Gather all ownership documents (deed, tax receipts, survey records). (2) File a case in the appropriate district court. (3) For ancestral property, all legal heirs have equal rights. (4) Mediation is often faster and cheaper than litigation. (5) A lawyer can help determine the correct legal procedure.",
             "ne": "सम्पत्ति विवादका लागि: (१) सबै स्वामित्व कागजात जम्मा गर्नुहोस् (बैनापत्त्र, कर रसीद, सर्वेक्षण)। (२) उपयुक्त जिल्ला अदालतमा मुद्दा दर्ता गर्नुहोस्। (३) पुस्तैनी सम्पत्तिमा सबै वैध उत्तराधिकारीको समान अधिकार छ। (४) मध्यस्थता प्रायः मुद्दा भन्दा छिटो र सस्तो हुन्छ। (५) वकीलले सही कानूनी प्रक्रिया निर्धारण गर्न मद्दत गर्न सक्छ।",
             "hi": "सम्पत्ति विवाद के लिए: (1) सभी स्वामित्व दस्तावेज इकट्ठा करें (विलेख, कर रसीद, सर्वेक्षण)। (2) उचित जिला न्यायालय में मामला दर्ज करें। (3) पैतृक सम्पत्ति में सभी वैध उत्तराधिकारियों को समान अधिकार है। (4) मध्यस्थता अक्सर मुकदमे से तेज और सस्ती है। (5) वकील सही कानूनी प्रक्रिया निर्धारित करने में मदद कर सकता है।",
+        },
+        "tenant_issues": {
+            "en": "For tenant/eviction issues: (1) A landlord cannot evict you without proper legal notice (usually 15-30 days). (2) Your security deposit must be returned within the timeframe specified in your agreement. (3) You have the right to challenge an eviction in court. (4) Keep copies of your rental agreement and all payment receipts. (5) If physically forced out, file a police complaint immediately.",
+            "ne": "भाडाटिका/निकासी समस्याका लागि: (१) भाडादाताले उचित कानूनी सूचना बिना निकाल्न सक्दैनन् (सामान्यतया १५-३० दिन)। (२) तपाईंको सुरक्षा जम्मा सम्झौतामा निर्धारित समयसीमाभित्र फिर्ता गर्नुपर्छ। (३) निकासीको विरुद्ध अदालतमा चुनौती दिने अधिकार छ। (४) भाडा सम्झौता र सबै भुक्तानी रसीदहरूको प्रतिलिपि राख्नुहोस्। (५) शारीरिक रूपमा बाहिर गरिएमा, तुरुन्तै प्रहरी शिकायत दर्ता गर्नुहोस्।",
+            "hi": "किरायेदार/बेदखली समस्याओं के लिए: (1) मकान मालिक बिना उचित कानूनी नोटिस के आपको नहीं निकाल सकता (आमतौर पर 15-30 दिन)। (2) आपकी सुरक्षा जमा राशि आपके समझौते में निर्धारित समयसीमा के भीतर लौटाई जानी चाहिए। (3) बेदखली को अदालत में चुनौती देने का अधिकार है। (4) अपने किराया समझौते और सभी भुगतान रसीदों की प्रतियां रखें। (5) शारीरिक रूप से बाहर निकाले जाने पर, तुरंत पुलिस शिकायत दर्ज करें।",
+        },
+        "neighbor_dispute": {
+            "en": "For neighbor disputes: (1) Try to resolve the issue through direct, calm communication first. (2) Document any encroachment with photos and measurements. (3) For boundary disputes, request a survey from the local land revenue office. (4) File a complaint with the local municipality if it's a nuisance issue. (5) As a last resort, file a civil suit for injunction.",
+            "ne": "छिमेकी विवादका लागि: (१) पहिले प्रत्यक्ष, शान्त संवादमार्फत समस्या समाधान गर्ने प्रयास गर्नुहोस्। (२) कुनै पनि अतिक्रमणको फोटो र मापनसहित प्रमाणित गर्नुहोस्। (३) सीमा विवादका लागि, स्थानीय भूमि राजस्व कार्यालयबाट सर्वेक्षण अनुरोध गर्नुहोस्। (४) निकृष्ट कार्य भएमा, स्थानीय नगरपालिकामा शिकायत दर्ता गर्नुहोस्। (५) अन्तिम उपायको रूपमा, निषेधाज्ञाको लागि दीवानी मुद्दा दर्ता गर्नुहोस्।",
+            "hi": "पड़ोसी विवादों के लिए: (1) पहले सीधे, शांत संवाद के माध्यम से समस्या को सुलझाने की कोशिश करें। (2) किसी भी अतिक्रमण की फोटो और मापन के साथ दस्तावेजीकरण करें। (3) सीमा विवाद के लिए, स्थानीय भूमि राजस्व कार्यालय से सर्वेक्षण का अनुरोध करें। (4) उपद्रव की स्थिति में, स्थानीय नगरपालिका में शिकायत दर्ज करें। (5) अंतिम उपाय के रूप में, निषेधाज्ञा के लिए दीवानी मुकदमा दर्ज करें।",
         },
     }
 

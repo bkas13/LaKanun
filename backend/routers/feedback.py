@@ -156,6 +156,32 @@ async def submit_general_feedback(
     return {"ok": True, "id": fb.id}
 
 
+class CitationReportRequest(BaseModel):
+    result_id: str = Field(..., min_length=1, max_length=200)
+    issue: str = Field(..., pattern="^(citation_inaccuracy|outdated_info|wrong_source|other)$")
+    details: Optional[str] = Field(None, max_length=2000)
+
+
+@router.post("/report-citation")
+async def report_citation(
+    req: CitationReportRequest,
+    user: Optional[User] = Depends(optional_user),
+    db: AsyncSession = Depends(get_db),
+):
+    fb = GeneralFeedback(
+        user_id=user.id if user else None,
+        feedback_type="objection",
+        subject=f"Citation report: {req.result_id}",
+        message=f"Issue: {req.issue}\nDetails: {req.details or 'None provided'}\nResult ID: {req.result_id}",
+        email=None,
+        page_url=None,
+        locale=None,
+    )
+    db.add(fb)
+    await db.commit()
+    return {"ok": True, "message": "Citation report submitted"}
+
+
 @router.get("/all")
 async def list_all_feedback(
     user: User = Depends(optional_user),

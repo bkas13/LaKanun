@@ -12,6 +12,7 @@ class UserResponse(BaseModel):
     role: str
     is_active: bool
     language_pref: str
+    ai_tier: str = "free"
     created_at: datetime
 
     class Config:
@@ -28,3 +29,4 @@ class AdminUserUpdate(BaseModel):
     role: Optional[str] = Field(None, pattern="^(public|lawyer|judge|admin)$")
     is_active: Optional[bool] = None
     language_pref: Optional[str] = Field(None, pattern="^(en|ne|hi)$")
+    ai_tier: Optional[str] = Field(None, pattern="^(free|basic|pro|enterprise)$")

@@ -676,6 +676,525 @@ SCENARIOS = [
             {"country": "india", "article_id": "india_const_art_39A", "title": "Equal justice and free legal aid"},
             {"country": "india", "article_id": "india_const_art_14", "title": "Equality before law"}
         ]
+    },
+    {
+        "id": "police_harassment",
+        "icon": "police",
+        "category": "criminal",
+        "title": {
+            "en": "Police Harassment or Bribery Demand",
+            "ne": "प्रहरी द्वारा सताउने वा घुस माग्ने",
+            "hi": "पुलिस उत्पीड़न या रिश्वत की मांग"
+        },
+        "description": {
+            "en": "Police cannot ask for bribes, threaten you, or mistreat you. You have protections against official misconduct.",
+            "ne": "प्रहरीले घुस माग्न, धम्की दिन, वा दुर्व्यवहार गर्न सक्दैन। तपाईंसँग आधिकारिक दुर्व्यवहारविरुद्ध सुरक्षा छ।",
+            "hi": "पुलिस रिश्वत नहीं मांग सकती, धमका नहीं सकती, या दुर्व्यवहार नहीं कर सकती। आधिकारिक दुर्व्यवहार के खिलाफ सुरक्षा है।"
+        },
+        "your_rights": {
+            "en": [
+                "Right to refuse to pay a bribe — it is a crime for police to ask",
+                "Right to record the officer's name and badge number",
+                "Right to file a complaint with the Police Commission",
+                "Right to refuse a search without a warrant (except in urgent cases)",
+                "Right to legal representation if detained"
+            ],
+            "ne": [
+                "घुस दिनबाट इन्कार गर्ने अधिकार — प्रहरीले माग्नु अपराध हो",
+                "अधिकारीको नाम र ब्याज नम्बर रेकर्ड गर्ने अधिकार",
+                "प्रहरी आयोगमा शिकायत दर्ता गर्ने अधिकार",
+                "वारेन्ट बिना खोजबाट इन्कार गर्ने अधिकार (आपतकालीन अवस्था बाहेक)",
+                "हिरासतमा भएमा कानूनी प्रतिनिधित्वको अधिकार"
+            ],
+            "hi": [
+                "रिश्वत देने से मना करने का अधिकार — पुलिस का मांगना अपराध है",
+                "अधिकारी का नाम और बैज नंबर रिकॉर्ड करने का अधिकार",
+                "पुलिस आयोग में शिकायत दर्ज करने का अधिकार",
+                "वारंट के बिना तलाशी से मना करने का अधिकार (आपातकालीन स्थिति को छोड़कर)",
+                "हिरासत में कानूनी प्रतिनिधित्व का अधिकार"
+            ]
+        },
+        "what_authorities_must_do": {
+            "en": [
+                "Police must wear name tags and show ID on request",
+                "Must register complaints against fellow officers",
+                "Cannot demand money to settle a case",
+                "Must provide a written reason for any detention"
+            ],
+            "ne": [
+                "प्रहरीले नाम ट्याग लगाउनुपर्छ र अनुरोधमा आईडी देखाउनुपर्छ",
+                "आफ्नै साथीविरुद्ध शिकायत दर्ता गर्नुपर्छ",
+                "मुद्दा सेटल गर्न पैसा माग्न हुँदैन",
+                "कुनै पनि हिरासतको लागि लिखित कारण दिनुपर्छ"
+            ],
+            "hi": [
+                "पुलिस को नाम टैग लगाना होगा और अनुरोध पर आईडी दिखानी होगी",
+                "अपने साथियों के खिलाफ शिकायत दर्ज करनी होगी",
+                "मामला सेटल करने के लिए पैसे नहीं मांग सकते",
+                "किसी भी हिरासत के लिए लिखित कारण देना होगा"
+            ]
+        },
+        "deadlines": {
+            "en": "Complaint can be filed at any time; no time limit for misconduct reports",
+            "ne": "कुनै पनि बेला शिकायत दर्ता गर्न सकिन्छ; दुर्व्यवहार रिपोर्टको लागि समय सीमा छैन",
+            "hi": "कभी भी शिकायत दर्ज की जा सकती है; दुर्व्यवहार रिपोर्ट के लिए कोई समय सीमा नहीं"
+        },
+        "where_to_go": {
+            "en": "Police Headquarters, National Human Rights Commission, or District Court",
+            "ne": "प्रहरी मुख्यालय, मानवअधिकार आयोग, वा जिल्ला अदालत",
+            "hi": "पुलिस मुख्यालय, राष्ट्रीय मानवाधिकार आयोग, या जिला न्यायालय"
+        },
+        "provisions": [
+            {"country": "nepal", "article_id": "nepal_const_art_22", "title": "Right against torture"},
+            {"country": "nepal", "article_id": "nepal_const_art_27", "title": "Right relating to public service"},
+            {"country": "nepal", "article_id": "nepal_const_art_16", "title": "Right to live with dignity"},
+            {"country": "india", "article_id": "india_const_art_21", "title": "Protection of life and personal liberty"},
+            {"country": "india", "article_id": "india_const_art_14", "title": "Equality before law"}
+        ]
+    },
+    {
+        "id": "tenant_rights",
+        "icon": "home",
+        "category": "civil",
+        "title": {
+            "en": "Tenant Rights - Eviction or Deposit Dispute",
+            "ne": "भाडाटिका अधिकार - निकासी वा जम्मा विवाद",
+            "hi": "किरायेदार अधिकार - बेदखली या जमा विवाद"
+        },
+        "description": {
+            "en": "Landlords cannot evict you without notice, seize your deposit, or deny basic services. Know your rights as a tenant.",
+            "ne": "भाडादाताले सूचना बिना निकासी गर्न, जम्मा खेर्न, वा आधारभूत सेवा रोक्न सक्दैन। भाडाटिकाको रूपमा आफ्नो अधिकार जान्नुहोस्।",
+            "hi": "मकान मालिक बिना नोटिस बेदखल नहीं कर सकते, जमा राशि नहीं रख सकते, या बुनियादी सेवाएं नहीं रोक सकते।"
+        },
+        "your_rights": {
+            "en": [
+                "Right to receive 30 days written notice before eviction",
+                "Right to full return of security deposit with deductions explained",
+                "Right to habitable living conditions (water, electricity, sanitation)",
+                "Right to a written rental agreement",
+                "Right against rent increase without proper notice"
+            ],
+            "ne": [
+                "निकासीअघि ३० दिनको लिखित सूचना पाउने अधिकार",
+                "जम्मा पूरा फिर्ता पाउने अधिकार, कटौती स्पष्ट भएको",
+                "बस्नयोग्य जीवन स्थितिको अधिकार (पानी, बत्ती, सरसफाइ)",
+                "लिखित भाडा सम्झौता पाउने अधिकार",
+                "उचित सूचना बिना भाडा वृद्धिविरुद्धको अधिकार"
+            ],
+            "hi": [
+                "बेदखली से पहले 30 दिन का लिखित नोटिस मिलने का अधिकार",
+                "सुरक्षा जमा राशि की पूरी वापसी, कटौती स्पष्ट के साथ",
+                "रहने योग्य जीवन स्थितियों का अधिकार (पानी, बिजली, स्वच्छता)",
+                "लिखित किराया समझौता मिलने का अधिकार",
+                "उचित नोटिस के बिना किराया वृद्धि के खिलाफ अधिकार"
+            ]
+        },
+        "what_authorities_must_do": {
+            "en": [
+                "Court must hear tenant before issuing eviction order",
+                "Landlord must return deposit within 30 days of move-out",
+                "Municipality must enforce housing standards",
+                "Police cannot forcibly evict without court order"
+            ],
+            "ne": [
+                "अदालतले निकासी आदेश जारी गर्नुअघि भाडाटिकालाई सुन्नुपर्छ",
+                "भाडादाताले बसाइसरेको ३० दिनभित्र जम्मा फिर्ता गर्नुपर्छ",
+                "नगरपालिकाले आवास मापदण्ड लागू गर्नुपर्छ",
+                "प्रहरीले अदालतको आदेश बिना जबरजस्ती निकासी गर्न हुँदैन"
+            ],
+            "hi": [
+                "अदालत को बेदखली आदेश जारी करने से पहले किरायेदार की सुनवाई करनी होगी",
+                "मकान मालिक को शिफ्ट-आउट के 30 दिनों के भीतर जमा राशि लौटानी होगी",
+                "नगरपालिका को आवास मानक लागू करने होंगे",
+                "पुलिस अदालत के आदेश के बिना जबरन बेदखली नहीं कर सकती"
+            ]
+        },
+        "deadlines": {
+            "en": "Deposit return within 30 days; eviction notice of 30 days minimum",
+            "ne": "३० दिनभित्र जम्मा फिर्ता; न्यूनतम ३० दिनको निकासी सूचना",
+            "hi": "30 दिन के भीतर जमा वापसी; न्यूनतम 30 दिन का बेदखली नोटिस"
+        },
+        "where_to_go": {
+            "en": "District Court, Municipality Office, or Rent Control Board",
+            "ne": "जिल्ला अदालत, नगरपालिका कार्यालय, वा भाडा नियन्त्रण बोर्ड",
+            "hi": "जिला न्यायालय, नगरपालिका कार्यालय, या किराया नियंत्रण बोर्ड"
+        },
+        "provisions": [
+            {"country": "nepal", "article_id": "nepal_const_art_25", "title": "Right to shelter"},
+            {"country": "nepal", "article_id": "nepal_const_art_16", "title": "Right to live with dignity"},
+            {"country": "india", "article_id": "india_const_art_21", "title": "Protection of life and personal liberty"},
+            {"country": "india", "article_id": "india_const_art_19", "title": "Freedom of residence"}
+        ]
+    },
+    {
+        "id": "traffic_stop",
+        "icon": "police",
+        "category": "criminal",
+        "title": {
+            "en": "Traffic Stop - Know Your Rights",
+            "ne": "ट्राफिक रोक - आफ्नो अधिकार जान्नुहोस्",
+            "hi": "ट्रैफिक रोक - अपने अधिकार जानें"
+        },
+        "description": {
+            "en": "Whether stopped for a routine check or a violation, you have specific rights during a traffic stop.",
+            "ne": "नियमित जाँच वा उल्लंघनका लागि रोकिए पनि, ट्राफिक रोकमा तपाईंका विशेष अधिकार छन्।",
+            "hi": "नियमित जांच या उल्लंघन के लिए रोके जाने पर भी, ट्रैफिक रोक में आपके विशेष अधिकार हैं।"
+        },
+        "your_rights": {
+            "en": [
+                "Right to ask for the officer's name and ID",
+                "Right to know the specific reason for being stopped",
+                "Right to refuse a vehicle search without probable cause",
+                "Right to remain silent beyond providing license and registration",
+                "Right to note down the officer's details for any complaint"
+            ],
+            "ne": [
+                "अधिकारीको नाम र आईडी सोध्ने अधिकार",
+                "रोकिनुको विशिष्ट कारण जान्ने अधिकार",
+                "सम्भाव्य कारण बिना गाडी खोजबाट इन्कार गर्ने अधिकार",
+                "लाइसेन्स र रजिस्ट्रेसन दिने बाहेक मौन रहने अधिकार",
+                "शिकायतका लागि अधिकारीको विवरण रेकर्ड गर्ने अधिकार"
+            ],
+            "hi": [
+                "अधिकारी का नाम और आईडी पूछने का अधिकार",
+                "रोके जाने का विशिष्ट कारण जानने का अधिकार",
+                "संभाव्य कारण के बिना गाड़ी की तलाशी से मना करने का अधिकार",
+                "लाइसेंस और रजिस्ट्रेशन देने के अलावा चुप रहने का अधिकार",
+                "शिकायत के लिए अधिकारी का विवरण नोट करने का अधिकार"
+            ]
+        },
+        "what_authorities_must_do": {
+            "en": [
+                "Officer must state the reason for stopping you",
+                "Must show ID and name tag when requested",
+                "Cannot search your vehicle without consent or probable cause",
+                "Must issue a receipt for any fine imposed"
+            ],
+            "ne": [
+                "अधिकारीले तपाईंलाई रोकेको कारण भन्नुपर्छ",
+                "अनुरोधमा आईडी र नाम ट्याग देखाउनुपर्छ",
+                "सहमति वा सम्भाव्य कारण बिना गाडी खोज्न हुँदैन",
+                "लगाइएको जरिवानाको रसीद दिनुपर्छ"
+            ],
+            "hi": [
+                "अधिकारी को आपको रोकने का कारण बताना होगा",
+                "अनुरोध पर आईडी और नाम टैग दिखाना होगा",
+                "सहमति या संभाव्य कारण के बिना गाड़ी की तलाशी नहीं ले सकते",
+                "लगाए गए जुर्माने की रसीद देनी होगी"
+            ]
+        },
+        "deadlines": {
+            "en": "Traffic fines must be challenged in court within 15 days",
+            "ne": "ट्राफिक जरिवाना १५ दिनभित्र अदालतमा चुनौती दिनुपर्छ",
+            "hi": "ट्रैफिक जुर्माने को अदालत में 15 दिन के भीतर चुनौती देनी होगी"
+        },
+        "where_to_go": {
+            "en": "Traffic Police Office, Transport Management Office, or District Court",
+            "ne": "ट्राफिक प्रहरी कार्यालय, यातायात व्यवस्थापन कार्यालय, वा जिल्ला अदालत",
+            "hi": "ट्रैफिक पुलिस कार्यालय, परिवहन प्रबंधन कार्यालय, या जिला न्यायालय"
+        },
+        "provisions": [
+            {"country": "nepal", "article_id": "nepal_const_art_22", "title": "Right against torture"},
+            {"country": "nepal", "article_id": "nepal_const_art_16", "title": "Right to live with dignity"},
+            {"country": "india", "article_id": "india_const_art_20", "title": "Protection in respect of conviction"},
+            {"country": "india", "article_id": "india_const_art_21", "title": "Protection of life and personal liberty"}
+        ]
+    },
+    {
+        "id": "medical_negligence",
+        "icon": "scale",
+        "category": "consumer",
+        "title": {
+            "en": "Medical Negligence or Hospital Issues",
+            "ne": "चिकित्सा लापरवाही वा अस्पताल समस्या",
+            "hi": "चिकित्सा लापरवाही या अस्पताल की समस्या"
+        },
+        "description": {
+            "en": "If you received negligent medical treatment, were overcharged, or denied emergency care, you have legal remedies.",
+            "ne": "यदि तपाईंलाई लापरवाह उपचार भएको छ, अत्यधिक शुल्क लगाइएको छ, वा आपतकालीन सेवा बाट वञ्चित गरिएको छ भने, कानूनी उपाय छन्।",
+            "hi": "यदि आपको लापरवाह चिकित्सा उपचार मिला है, अधिक शुल्क लगाया गया है, या आपातकालीन देखभाल से वंचित किया गया है, तो कानूनी उपाय हैं।"
+        },
+        "your_rights": {
+            "en": [
+                "Right to informed consent before any treatment",
+                "Right to access your complete medical records",
+                "Right to emergency medical treatment regardless of ability to pay",
+                "Right to file a complaint against negligent doctors",
+                "Right to compensation for medical malpractice"
+            ],
+            "ne": [
+                "कुनै पनि उपचारअघि सूचित सहमतिको अधिकार",
+                "आफ्नो पूर्ण चिकित्सा रेकर्डमा पहुँचको अधिकार",
+                "भुक्तानी क्षमताको परवाह नगरी आपतकालीन उपचारको अधिकार",
+                "लापरवाह चिकित्सकविरुद्ध शिकायत दर्ता गर्ने अधिकार",
+                "चिकित्सा लापरवाहीको क्षतिपूर्तिको अधिकार"
+            ],
+            "hi": [
+                "किसी भी उपचार से पहले सूचित सहमति का अधिकार",
+                "अपने पूर्ण चिकित्सा रिकॉर्ड तक पहुंच का अधिकार",
+                "भुगतान क्षमता की परवाह किए बिना आपातकालीन चिकित्सा उपचार का अधिकार",
+                "लापरवाह डॉक्टरों के खिलाफ शिकायत दर्ज करने का अधिकार",
+                "चिकित्सा लापरवाही के लिए मुआवजे का अधिकार"
+            ]
+        },
+        "what_authorities_must_do": {
+            "en": [
+                "Hospital must provide treatment in emergencies",
+                "Medical council must investigate complaints against doctors",
+                "Hospital must maintain and share medical records",
+                "Cannot refuse treatment for inability to pay"
+            ],
+            "ne": [
+                "अस्पतालले आपतकालीन अवस्थामा उपचार दिनुपर्छ",
+                "चिकित्सा परिषदले चिकित्सकविरुद्ध शिकायतको छानबिन गर्नुपर्छ",
+                "अस्पतालले चिकित्सा रेकर्ड मिलाउनुपर्छ",
+                "भुक्तानी नगर्नुका कारण उपचार अस्वीकार गर्न हुँदैन"
+            ],
+            "hi": [
+                "अस्पताल को आपातकाल में इलाज देना होगा",
+                "चिकित्सा परिषद को डॉक्टरों के खिलाफ शिकायतों की जांच करनी होगी",
+                "अस्पताल को चिकित्सा रिकॉर्ड बनाए रखने और साझा करने होंगे",
+                "भुगतान न कर पाने के कारण इलाज से इनकार नहीं कर सकते"
+            ]
+        },
+        "deadlines": {
+            "en": "File medical negligence claim within 2 years of the incident",
+            "ne": "घटनाको २ वर्षभित्र चिकित्सा लापरवाही दाबी दर्ता गर्नुपर्छ",
+            "hi": "घटना के 2 साल के भीतर चिकित्सा लापरवाही का दावा दर्ज करना होगा"
+        },
+        "where_to_go": {
+            "en": "District Court, Medical Council, or Consumer Forum",
+            "ne": "जिल्ला अदालत, चिकित्सा परिषद, वा उपभोक्ता फोरम",
+            "hi": "जिला न्यायालय, चिकित्सा परिषद, या उपभोक्ता फोरम"
+        },
+        "provisions": [
+            {"country": "nepal", "article_id": "nepal_const_art_16", "title": "Right to live with dignity"},
+            {"country": "nepal", "article_id": "nepal_const_art_44", "title": "Right of consumers"},
+            {"country": "india", "article_id": "india_const_art_21", "title": "Protection of life and personal liberty"},
+            {"country": "india", "article_id": "india_const_art_32", "title": "Right to constitutional remedies"}
+        ]
+    },
+    {
+        "id": "neighbor_dispute",
+        "icon": "home",
+        "category": "civil",
+        "title": {
+            "en": "Neighbor Dispute - Noise, Boundary, or Nuisance",
+            "ne": "छिमेकी विवाद - शोर, सीमा, वा गाइँ",
+            "hi": "पड़ोसी विवाद - शोर, सीमा, या उपद्रव"
+        },
+        "description": {
+            "en": "Issues with neighbors over noise, property boundaries, or disturbance have legal solutions.",
+            "ne": "शोर, सम्पत्ति सीमा, अतिक्रमण, वा गाइँका लागि छिमेकीसँगको समस्याको कानूनी समाधान छ।",
+            "hi": "शोर, सम्पत्ति की सीमा, अतिक्रमण, या परेशानी के लिए पड़ोसियों के साथ समस्या का कानूनी समाधान है।"
+        },
+        "your_rights": {
+            "en": [
+                "Right to quiet enjoyment of your property",
+                "Right to seek injunction to stop encroachment",
+                "Right to file complaint for structural damage caused by neighbor",
+                "Right to action for persistent noise or nuisance",
+                "Right to demarcation of property boundaries"
+            ],
+            "ne": [
+                "आफ्नो सम्पत्तिमा शान्तिपूर्वक बस्ने अधिकार",
+                "अतिक्रमण रोक्न निषेधाज्ञा खोज्ने अधिकार",
+                "छिमेकीले गरेको संरचनात्मक क्षतिको शिकायत दर्ता गर्ने अधिकार",
+                "निरन्तर शोर वा गाइँको लागि कारबाही गर्ने अधिकार",
+                "सम्पत्ति सीमा निर्धारणको अधिकार"
+            ],
+            "hi": [
+                "अपनी सम्पत्ति में शांतिपूर्वक रहने का अधिकार",
+                "अतिक्रमण रोकने के लिए निषेधाज्ञा प्राप्त करने का अधिकार",
+                "पड़ोसी द्वारा संरचनात्मक नुकसान की शिकायत दर्ज करने का अधिकार",
+                "लगातार शोर या उपद्रव के लिए कार्रवाई का अधिकार",
+                "सम्पत्ति सीमा निर्धारण का अधिकार"
+            ]
+        },
+        "what_authorities_must_do": {
+            "en": [
+                "Municipality must enforce building and zoning rules",
+                "Court can issue noise abatement orders",
+                "Police can file FIR for persistent nuisance",
+                "Land Revenue Office can help demarcate boundaries"
+            ],
+            "ne": [
+                "नगरपालिकाले भवन र जोनिङ नियम लागू गर्नुपर्छ",
+                "अदालतले शोर नियन्त्रण आदेश जारी गर्न सक्छ",
+                "प्रहरीले निरन्तर गाइँको लागि FIR दर्ता गर्न सक्छ",
+                "भूमि राजस्व कार्यालयले सीमा निर्धारणमा सहयोग गर्न सक्छ"
+            ],
+            "hi": [
+                "नगरपालिका को भवन और ज़ोनिंग नियम लागू करने होंगे",
+                "अदालत शोर नियंत्रण आदेश जारी कर सकती है",
+                "पुलिस लगातार उपद्रव के लिए FIR दर्ज कर सकती है",
+                "भूमि राजस्व कार्यालय सीमा निर्धारण में सहायता कर सकता है"
+            ]
+        },
+        "deadlines": {
+            "en": "Civil suit must be filed within 3 years; nuisance complaints can be filed anytime",
+            "ne": "दीवानी मुद्दा ३ वर्षभित्र दर्ता गर्नुपर्छ; गाइँको शिकायत कुनै पनि बेला गर्न सकिन्छ",
+            "hi": "दीवानी मुकदमा 3 साल के भीतर दर्ज करना होगा; उपद्रव की शिकायत कभी भी की जा सकती है"
+        },
+        "where_to_go": {
+            "en": "Municipality Office, District Court, or Land Revenue Office",
+            "ne": "नगरपालिका कार्यालय, जिल्ला अदालत, वा भूमि राजस्व कार्यालय",
+            "hi": "नगरपालिका कार्यालय, जिला न्यायालय, या भूमि राजस्व कार्यालय"
+        },
+        "provisions": [
+            {"country": "nepal", "article_id": "nepal_const_art_25", "title": "Right to property"},
+            {"country": "nepal", "article_id": "nepal_const_art_16", "title": "Right to live with dignity"},
+            {"country": "india", "article_id": "india_const_art_21", "title": "Protection of life and personal liberty"},
+            {"country": "india", "article_id": "india_const_art_14", "title": "Equality before law"}
+        ]
+    },
+    {
+        "id": "marriage_divorce",
+        "icon": "family",
+        "category": "family",
+        "title": {
+            "en": "Marriage Registration or Divorce",
+            "ne": "विवाह दर्ता वा छुट्टाछुटी",
+            "hi": "विवाह पंजीकरण या तलाक"
+        },
+        "description": {
+            "en": "Know your rights about marriage registration, consent, and what happens during separation or divorce.",
+            "ne": "विवाह दर्ता, सहमतिका आवश्यकता, र छुट्टाछुटीको क्रममा के हुन्छ भन्नेबारे आफ्नो अधिकार जान्नुहोस्।",
+            "hi": "विवाह पंजीकरण, सहमति, और अलगाव या तलाक के दौरान क्या होता है, इसके बारे में अपने अधिकार जानें।"
+        },
+        "your_rights": {
+            "en": [
+                "Right to register marriage at local office",
+                "Right to consent - forced marriage is illegal",
+                "Right to equal property division upon divorce",
+                "Right to maintenance and alimony after separation",
+                "Right to custody arrangement in child's best interest"
+            ],
+            "ne": [
+                "स्थानीय कार्यालयमा विवाह दर्ता गर्ने अधिकार",
+                "सहमतिको अधिकार - जबरजस्ती विवाह गैरकानूनी छ",
+                "छुट्टाछुटीमा समान सम्पत्ति विभाजनको अधिकार",
+                "अलगावपछि भरणपोषण र गुजारा भत्ताको अधिकार",
+                "बालबालिकाको सर्वोत्तम हितमा हिरासत व्यवस्थाको अधिकार"
+            ],
+            "hi": [
+                "स्थानीय कार्यालय में विवाह पंजीकृत करने का अधिकार",
+                "सहमति का अधिकार - जबरन विवाह गैरकानूनी है",
+                "तलाक पर समान सम्पत्ति विभाजन का अधिकार",
+                "अलगाव के बाद भरण-पोषण और गुजारा भत्ते का अधिकार",
+                "बच्चे के सर्वोत्तम हित में हिरासत व्यवस्था का अधिकार"
+            ]
+        },
+        "what_authorities_must_do": {
+            "en": [
+                "Local government must register marriages",
+                "Court must hear both parties in divorce proceedings",
+                "Maintenance must be ordered based on financial need",
+                "Child custody decided based on welfare of the child"
+            ],
+            "ne": [
+                "स्थानीय सरकारले विवाह दर्ता गर्नुपर्छ",
+                "अदालतले छुट्टाछुटी कार्यवाहीमा दुवै पक्षलाई सुन्नुपर्छ",
+                "आर्थिक आवश्यकता अनुसार भरणपोषण आदेश गर्नुपर्छ",
+                "बालबालिकाको कल्याणमा हिरासत निर्णय गरिन्छ"
+            ],
+            "hi": [
+                "स्थानीय सरकार को विवाह पंजीकृत करने होंगे",
+                "अदालत को तलाक की कार्यवाही में दोनों पक्षों की सुनवाई करनी होगी",
+                "वित्तीय आवश्यकता के आधार पर भरण-पोषण का आदेश देना होगा",
+                "बच्चे के कल्याण के आधार पर हिरासत का निर्णय"
+            ]
+        },
+        "deadlines": {
+            "en": "Divorce petition can be filed after 1 year of marriage; maintenance claims have no time limit",
+            "ne": "विवाहको १ वर्षपछि छुट्टाछुटी दाबी दर्ता गर्न सकिन्छ; भरणपोषण दाबीको लागि समय सीमा छैन",
+            "hi": "विवाह के 1 साल बाद तलाक का दावा दर्ज किया जा सकता है; भरण-पोषण दावे के लिए कोई समय सीमा नहीं"
+        },
+        "where_to_go": {
+            "en": "District Court, Local Municipality, or Family Court",
+            "ne": "जिल्ला अदालत, स्थानीय नगरपालिका, वा पारिवारिक अदालत",
+            "hi": "जिला न्यायालय, स्थानीय नगरपालिका, या पारिवारिक न्यायालय"
+        },
+        "provisions": [
+            {"country": "nepal", "article_id": "nepal_const_art_35", "title": "Right relating to marriage"},
+            {"country": "nepal", "article_id": "nepal_const_art_18", "title": "Right to equality"},
+            {"country": "india", "article_id": "india_const_art_14", "title": "Equality before law"},
+            {"country": "india", "article_id": "india_const_art_15", "title": "Prohibition of discrimination"}
+        ]
+    },
+    {
+        "id": "government_service",
+        "icon": "scale",
+        "category": "constitutional",
+        "title": {
+            "en": "Government Service Delay or Denial",
+            "ne": "सरकारी सेवा ढिलाइ वा अस्वीकार",
+            "hi": "सरकारी सेवा में देरी या इनकार"
+        },
+        "description": {
+            "en": "If a government office is delaying your application, demanding bribes, or refusing services you are entitled to, you have legal options.",
+            "ne": "यदि सरकारी कार्यालयले तपाईंको आवेदन ढिलाइ गरिरहेको छ, घुस मागिरहेको छ, वा सेवा दिन अस्वीकार गरिरहेको छ भने, कानूनी उपाय छन्।",
+            "hi": "यदि कोई सरकारी कार्यालय आपके आवेदन में देरी कर रहा है, रिश्वत मांग रहा है, या सेवाएं देने से इनकार कर रहा है, तो कानूनी विकल्प हैं।"
+        },
+        "your_rights": {
+            "en": [
+                "Right to timely delivery of public services",
+                "Right to file complaint for delayed services",
+                "Right to written reason for denial of service",
+                "Right to information about government decisions",
+                "Right to compensation for loss caused by government delay"
+            ],
+            "ne": [
+                "सार्वजनिक सेवाको समयमै डेलिभरीको अधिकार",
+                "ढिलाइ भएको सेवाको शिकायत दर्ता गर्ने अधिकार",
+                "सेवा अस्वीकारको लिखित कारण पाउने अधिकार",
+                "सरकारी निर्णयबारे जानकारी पाउने अधिकार",
+                "सरकारी ढिलाइले गरेको हानिको क्षतिपूर्तिको अधिकार"
+            ],
+            "hi": [
+                "सार्वजनिक सेवाओं की समय पर डिलीवरी का अधिकार",
+                "विलंबित सेवाओं की शिकायत दर्ज करने का अधिकार",
+                "सेवा अस्वीकार का लिखित कारण मिलने का अधिकार",
+                "सरकारी निर्णयों के बारे में जानकारी का अधिकार",
+                "सरकारी विलंब से हुई हानि के मुआवजे का अधिकार"
+            ]
+        },
+        "what_authorities_must_do": {
+            "en": [
+                "Government must process applications within prescribed time",
+                "Must provide written acknowledgment of receipt",
+                "Right to Information Act must be enforced",
+                "Grievance officer must respond within 15 days"
+            ],
+            "ne": [
+                "सरकारले निर्धारित समयमा आवेदन प्रशोधन गर्नुपर्छ",
+                "प्राप्तिको लिखित प्रमाणित दिनुपर्छ",
+                "सूचना अधिकार ऐन लागू गर्नुपर्छ",
+                "गुनासो अधिकारीले १५ दिनभित्र जवाफ दिनुपर्छ"
+            ],
+            "hi": [
+                "सरकार को निर्धारित समय में आवेदन संसाधित करने होंगे",
+                "प्राप्ति का लिखित प्रमाण देना होगा",
+                "सूचना अधिकार अधिनियम लागू किया जाना चाहिए",
+                "शिकायत अधिकारी को 15 दिनों के भीतर जवाब देना होगा"
+            ]
+        },
+        "deadlines": {
+            "en": "RTI application response within 30 days; service complaints within prescribed time",
+            "ne": "सूचना अधिकार आवेदनको जवाफ ३० दिनभित्र; सेवा शिकायत निर्धारित समयमा",
+            "hi": "सूचना अधिकार आवेदन का जवाब 30 दिन के भीतर; सेवा शिकायतें निर्धारित समय में"
+        },
+        "where_to_go": {
+            "en": "Information Commission, District Administration Office, or Grievance Cell",
+            "ne": "सूचना आयोग, जिल्ला प्रशासन कार्यालय, वा गुनासो शाखा",
+            "hi": "सूचना आयोग, जिला प्रशासन कार्यालय, या शिकायत प्रकोष्ठ"
+        },
+        "provisions": [
+            {"country": "nepal", "article_id": "nepal_const_art_27", "title": "Right relating to public service"},
+            {"country": "nepal", "article_id": "nepal_const_art_24", "title": "Right to information"},
+            {"country": "india", "article_id": "india_const_art_19", "title": "Freedom of speech and expression"},
+            {"country": "india", "article_id": "india_const_art_32", "title": "Right to constitutional remedies"}
+        ]
     }
 ]
 

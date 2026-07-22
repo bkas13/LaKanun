@@ -8,7 +8,7 @@ from sqlalchemy import select, delete, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.database import get_db
-from backend.dependencies import require_current_user, require_lawyer, require_judge
+from backend.dependencies import require_current_user, require_role
 from backend.models.user import User, Role
 from backend.models.bookmark import Bookmark
 from backend.models.case_note import CaseNote
@@ -23,7 +23,7 @@ router = APIRouter(prefix="/saved", tags=["Saved"])
 
 @router.get("/bookmarks", response_model=List[BookmarkResponse])
 async def list_bookmarks(
-    user: User = Depends(require_lawyer),
+    user: User = Depends(require_role(Role.LAWYER, Role.JUDGE, Role.ADMIN)),
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(
@@ -35,7 +35,7 @@ async def list_bookmarks(
 @router.post("/bookmarks", response_model=BookmarkResponse, status_code=201)
 async def create_bookmark(
     body: BookmarkCreate,
-    user: User = Depends(require_lawyer),
+    user: User = Depends(require_role(Role.LAWYER, Role.JUDGE, Role.ADMIN)),
     db: AsyncSession = Depends(get_db),
 ):
     bookmark = Bookmark(user_id=user.id, **body.model_dump())
@@ -48,7 +48,7 @@ async def create_bookmark(
 @router.delete("/bookmarks/{bookmark_id}", status_code=204)
 async def delete_bookmark(
     bookmark_id: int,
-    user: User = Depends(require_lawyer),
+    user: User = Depends(require_role(Role.LAWYER, Role.JUDGE, Role.ADMIN)),
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(
@@ -64,7 +64,7 @@ async def delete_bookmark(
 
 @router.get("/notes", response_model=List[CaseNoteResponse])
 async def list_notes(
-    user: User = Depends(require_lawyer),
+    user: User = Depends(require_role(Role.LAWYER, Role.JUDGE, Role.ADMIN)),
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(
@@ -76,7 +76,7 @@ async def list_notes(
 @router.post("/notes", response_model=CaseNoteResponse, status_code=201)
 async def create_note(
     body: CaseNoteCreate,
-    user: User = Depends(require_lawyer),
+    user: User = Depends(require_role(Role.LAWYER, Role.JUDGE, Role.ADMIN)),
     db: AsyncSession = Depends(get_db),
 ):
     note = CaseNote(user_id=user.id, **body.model_dump())
@@ -90,7 +90,7 @@ async def create_note(
 async def update_note(
     note_id: int,
     body: CaseNoteUpdate,
-    user: User = Depends(require_lawyer),
+    user: User = Depends(require_role(Role.LAWYER, Role.JUDGE, Role.ADMIN)),
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(
@@ -111,7 +111,7 @@ async def update_note(
 @router.delete("/notes/{note_id}", status_code=204)
 async def delete_note(
     note_id: int,
-    user: User = Depends(require_lawyer),
+    user: User = Depends(require_role(Role.LAWYER, Role.JUDGE, Role.ADMIN)),
     db: AsyncSession = Depends(get_db),
 ):
     result = await db.execute(

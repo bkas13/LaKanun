@@ -44,7 +44,7 @@ class TestIdentifyIssue:
         assert result["id"] == "domestic_violence"
 
     def test_property_dispute_identified(self):
-        result = identify_issue("My tenant won't leave my house")
+        result = identify_issue("Someone encroached on my ancestral land")
         assert result is not None
         assert result["id"] == "property_dispute"
 
@@ -495,7 +495,7 @@ class TestRightsScenarios:
 
     def test_nine_scenarios(self):
         scenarios = get_all_scenarios()
-        assert len(scenarios) == 9
+        assert len(scenarios) == 16
 
     def test_get_by_id_valid(self):
         scenario = get_scenario_by_id("arrest")

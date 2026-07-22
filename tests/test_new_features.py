@@ -80,7 +80,7 @@ class TestRightsAPI:
         assert resp.status_code == 200
         data = resp.json()
         assert "scenarios" in data
-        assert len(data["scenarios"]) == 9
+        assert len(data["scenarios"]) == 16
 
     async def test_list_scenarios_nepali(self, client):
         resp = await client.get("/api/v1/rights?lang=ne")
@@ -93,7 +93,7 @@ class TestRightsAPI:
         resp = await client.get("/api/v1/rights?lang=hi")
         assert resp.status_code == 200
         data = resp.json()
-        assert len(data["scenarios"]) == 9
+        assert len(data["scenarios"]) == 16
 
     async def test_filter_by_category(self, client):
         resp = await client.get("/api/v1/rights?category=criminal")

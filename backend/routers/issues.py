@@ -80,13 +80,14 @@ async def get_available_summaries():
 async def get_related(
     article_id: str,
     limit: int = Query(8, ge=1, le=20),
+    country: Optional[str] = Query(None, pattern="^(nepal|india)$"),
 ):
-    """Find provisions related to a given article across Nepal and India laws."""
+    """Find provisions related to a given article, filtered by country if specified."""
     article = law_service.get_by_id(article_id)
     if not article:
         return {"related": [], "article_id": article_id}
 
-    related = find_related_provisions(article_id, article=article, limit=limit)
+    related = find_related_provisions(article_id, article=article, limit=limit, country=country)
     return {
         "article_id": article_id,
         "article_title": article.get("title", ""),

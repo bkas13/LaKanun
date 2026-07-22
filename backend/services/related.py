@@ -54,6 +54,7 @@ def find_related_provisions(
     article_id: str,
     article: Optional[dict] = None,
     limit: int = 8,
+    country: Optional[str] = None,
 ) -> list[dict]:
     """Find provisions related to the given article.
 
@@ -62,6 +63,7 @@ def find_related_provisions(
     2. Find articles in related categories
     3. Score by keyword overlap
     4. Return top N related articles (excluding self)
+    5. If country filter is active, only return articles from that country
     """
     if article is None:
         article = law_service.get_by_id(article_id)
@@ -95,6 +97,10 @@ def find_related_provisions(
     candidates = []
     for a in law_service._articles:
         if a.get("id") == my_id:
+            continue
+
+        # Country filter: if a specific country is requested, skip others
+        if country and a.get("country", "") != country:
             continue
 
         score = 0.0

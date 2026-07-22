@@ -24,6 +24,12 @@ class LawSearchResult(BaseModel):
     score: float
     enactment_year: int = 0
     language: str = "en"
+    # Accuracy safeguards
+    confidence: str = "low"
+    citation: str = ""
+    last_verified: str = ""
+    source_url: str = ""
+    effective_date: str = ""
 
     model_config = {"populate_by_name": True}
 
@@ -66,3 +72,46 @@ class LawBrowseResponse(BaseModel):
     total: int
     offset: int
     limit: int
+
+
+class LawPopularResponse(BaseModel):
+    provision_id: str
+    title: str
+    country: str
+    category: str
+    view_count: int
+    article_number: str = ""
+    source_document: str = ""
+
+
+class LawCategoryResponse(BaseModel):
+    name: str
+    count: int
+    country_breakdown: dict = {}
+
+
+class LawRecentResponse(BaseModel):
+    provision_id: str
+    title: str
+    country: str
+    category: str
+    enactment_year: int
+    article_number: str = ""
+    source_document: str = ""
+
+
+class LawBookmarkRequest(BaseModel):
+    provision_id: str
+    country: str
+    category: str = ""
+    title: str = ""
+    note: str = ""
+
+
+class LawBookmarkResponse(BaseModel):
+    id: int
+    provision_id: str
+    country: str
+    title: str
+    note: str
+    created_at: str

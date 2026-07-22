@@ -16,6 +16,22 @@ class Role(str, enum.Enum):
     ADMIN = "admin"
 
 
+class AITier(str, enum.Enum):
+    FREE = "free"
+    BASIC = "basic"
+    PRO = "pro"
+    ENTERPRISE = "enterprise"
+
+
+# Tier limits: max AI requests per day
+TIER_LIMITS = {
+    AITier.FREE: 0,
+    AITier.BASIC: 10,
+    AITier.PRO: 100,
+    AITier.ENTERPRISE: -1,  # unlimited
+}
+
+
 class User(Base):
     __tablename__ = "users"
 
@@ -26,6 +42,7 @@ class User(Base):
     role: Mapped[Role] = mapped_column(Enum(Role), default=Role.PUBLIC, nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     language_pref: Mapped[str] = mapped_column(String(5), default="en", nullable=False)
+    ai_tier: Mapped[AITier] = mapped_column(Enum(AITier), default=AITier.FREE, nullable=False)
 
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False
@@ -42,6 +59,7 @@ class User(Base):
     case_notes = relationship("CaseNote", back_populates="user", cascade="all, delete-orphan")
     search_history = relationship("SearchHistory", back_populates="user", cascade="all, delete-orphan")
     audit_logs = relationship("AuditLog", back_populates="user", cascade="all, delete-orphan")
+    law_views = relationship("LawView", back_populates="user", cascade="all, delete-orphan")
 
     def __repr__(self) -> str:
         return f"<User {self.email} role={self.role.value}>"

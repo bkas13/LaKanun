@@ -16,7 +16,7 @@ sqlalchemy==2.0.51
 aiosqlite==0.22.1
 python-jose[cryptography]==3.5.0
 passlib[bcrypt]==1.7.4
-bcrypt==5.0.0
+bcrypt==4.0.1
 
 # Async HTTP
 aiohttp==3.9.5
